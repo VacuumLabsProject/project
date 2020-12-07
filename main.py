@@ -7,7 +7,7 @@ class Air:
 
 
 class Chamber:
-    def __init__(self, air: Air):
+    def __init__(self, air):
         self.air = air
 
 
@@ -26,17 +26,17 @@ class Valve:
 
 
 class Pump:
-    def __init__(self, type_of_pump: str,
-                 valve_to_chamber: Valve,
-                 valve_between_pumps: Valve or None,
-                 chamber: Chamber):
+    def __init__(self, type_of_pump,
+                 valve_to_chamber,
+                 valve_between_pumps,
+                 chamber):
         self.type = self.__compute_type(type_of_pump)
         self.valve_to_chamber = valve_to_chamber
         self.valve_between_pump = valve_between_pumps
         self.chamber = chamber
         valve_to_chamber.connection_with_chamber = chamber
 
-    def __compute_type(self, type_of_pump: str):
+    def __compute_type(self, type_of_pump):
         if type_of_pump == "forevac":
             return "forevac"
         elif type_of_pump == "turbomolec":
@@ -58,10 +58,11 @@ class Pump:
                 time.sleep(2)
 
         else:
-            print("что-то не соединено")
+            print "something does not connected"
 
 
 if __name__ == '__main__':
+
     air = Air(1010)
     chamber = Chamber(air)
     valve_between_chamber_and_pump = Valve()
@@ -76,4 +77,3 @@ if __name__ == '__main__':
     pump2.start_pump()
     valve_between_chamber_and_pump_2.open()
     pump2.start_pump()
-
