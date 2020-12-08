@@ -78,3 +78,4 @@ if __name__ == '__main__':
     valve_between_chamber_and_pump_2.open()
     pump2.start_pump()
     print("testGit")
+    print("testGit")
