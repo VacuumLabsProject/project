@@ -45,38 +45,24 @@ class Pump:
     def start_pump(self):
         if self.valve_between_pump is None:
             print("pre vacuum")
-            while chamber.air.pressure > 1000:
-                chamber.air.pressure -= 1
-                print(chamber.air.pressure)
-                time.sleep(1)
+            if self.chamber.air.pressure > 1000:
+                self.chamber.air.pressure -= 1
+                print(self.chamber.air.pressure)
+                # time.sleep(1)
+                return self.chamber.air.pressure
 
         elif self.valve_to_chamber.state == "open" and self.valve_between_pump.state == "open":
             print("main vacuum")
-            while chamber.air.pressure > 990:
-                chamber.air.pressure -= 1
-                print(chamber.air.pressure)
+            if self.chamber.air.pressure > 990:
+                self.chamber.air.pressure -= 1
+                print(self.chamber.air.pressure)
                 time.sleep(2)
+                return self.chamber.air.pressure
 
         else:
             print "something does not connected"
 
-
-if __name__ == '__main__':
-
-    air = Air(1010)
-    chamber = Chamber(air)
-    valve_between_chamber_and_pump = Valve()
-    valve_between_pumps = Valve()
-    valve_between_chamber_and_pump_2 = Valve()
-    pump = Pump("forevac", valve_between_chamber_and_pump, None, chamber)
-    pump2 = Pump("turbomolec", valve_between_chamber_and_pump_2,
-                 valve_between_pumps, chamber)
-    valve_between_chamber_and_pump.open()
-    valve_between_pumps.open()
-    pump.start_pump()
-    pump2.start_pump()
-    valve_between_chamber_and_pump_2.open()
-    pump2.start_pump()
-    print("testGit")
-    print("testGit")
-    print("testGit")
+    # pump.start_pump()
+    # pump2.start_pump()
+    # valve_between_chamber_and_pump_2.open()
+    # pump2.start_pump()
