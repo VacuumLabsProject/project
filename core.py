@@ -1,4 +1,5 @@
 import time
+import calculating_pressure
 
 
 class Air:
@@ -42,14 +43,10 @@ class Pump:
         elif type_of_pump == "turbomolec":
             return "turbomolec"
 
-    def start_pump(self):
+    def start_pump(self, time):
         if self.valve_between_pump is None:
-            print("pre vacuum")
-            if self.chamber.air.pressure > 1000:
-                self.chamber.air.pressure -= 1
-                print(self.chamber.air.pressure)
-                # time.sleep(1)
-                return self.chamber.air.pressure
+            p = calculating_pressure.calculating_forvacuum(100000, time)
+            return p
 
         elif self.valve_to_chamber.state == "open" and self.valve_between_pump.state == "open":
             print("main vacuum")

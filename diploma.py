@@ -206,18 +206,18 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None,
                                                          QtGui.QApplication.UnicodeUTF8))
-        self.valve1.setText(QtGui.QApplication.translate("Form", "К1", None,
+        self.valve1.setText(QtGui.QApplication.translate("Form", "V1", None,
                                                          QtGui.QApplication.UnicodeUTF8))
-        self.tm_pump.setText(QtGui.QApplication.translate("Form", "ТМН", None,
+        self.tm_pump.setText(QtGui.QApplication.translate("Form", "TMP", None,
                                                           QtGui.QApplication.UnicodeUTF8))
-        self.valve2.setText(QtGui.QApplication.translate("Form", "К2", None,
+        self.valve2.setText(QtGui.QApplication.translate("Form", "V2", None,
                                                          QtGui.QApplication.UnicodeUTF8))
-        self.fl_pump.setText(QtGui.QApplication.translate("Form", "ФВН", None,
+        self.fl_pump.setText(QtGui.QApplication.translate("Form", "FLP", None,
                                                           QtGui.QApplication.UnicodeUTF8))
-        self.valve3.setText(QtGui.QApplication.translate("Form", "К3", None,
+        self.valve3.setText(QtGui.QApplication.translate("Form", "V3", None,
                                                          QtGui.QApplication.UnicodeUTF8))
         self.Enable.setText(
-            QtGui.QApplication.translate("Form", "Включить питание", None,
+            QtGui.QApplication.translate("Form", "Turn on power", None,
                                          QtGui.QApplication.UnicodeUTF8))
         self.l_tm.setText(QtGui.QApplication.translate("Form", "l", None,
                                                        QtGui.QApplication.UnicodeUTF8))

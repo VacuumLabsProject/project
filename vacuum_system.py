@@ -13,4 +13,3 @@ class VacuumSystem:
         self.pump2 = core.Pump("turbomolec", self.valve_between_chamber_and_pump_2,
                                self.valve_between_pumps, self.chamber)
 
-        self.valve_between_pumps.open()
