@@ -43,18 +43,14 @@ class Pump:
         elif type_of_pump == "turbomolec":
             return "turbomolec"
 
-    def start_pump(self, time):
-        if self.valve_between_pump is None:
-            p = calculating_pressure.calculating_forvacuum(100000, time)
+    def start_pump(self, time, p0):
+        if self.type == "forevac":
+            p = calculating_pressure.calculating_pressure(p0, time, name="forvacuum")
             return p
 
-        elif self.valve_to_chamber.state == "open" and self.valve_between_pump.state == "open":
-            print("main vacuum")
-            if self.chamber.air.pressure > 990:
-                self.chamber.air.pressure -= 1
-                print(self.chamber.air.pressure)
-                time.sleep(2)
-                return self.chamber.air.pressure
+        elif self.type == "turbomolec":
+            p = calculating_pressure.calculating_pressure(p0, time, name="turbomolec")
+            return p
 
         else:
             print "something does not connected"

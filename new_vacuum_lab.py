@@ -19,8 +19,11 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         super(MainWindow, self).__init__()
         self.P = [100000]
         self.time = 0
+        self.time02 = 0
         self.time_interval = 100
         self.p0 = 100000
+        self.p02 = 133
+        self.p_cur = self.p0
 
         self.setupUi(self)
         self.time1.setText(str(self.time))
@@ -80,15 +83,36 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.TimerUp.start()
             self.TimerUp.setInterval(self.time_interval)
             self.TimerUp.timeout.connect(self.updateTime)
+
+        elif fl_but == "on" and tm_but == "on" and v2_but == "on" and v1_but == "on" and v3_but == "off":
+            self.TimerUp.start()
+            self.TimerUp.setInterval(self.time_interval)
+            self.TimerUp.timeout.connect(self.updateTime2)
+
+        elif fl_but == "on" and v3_but == "off" and v2_but == "off":
+            self.TimerUp.stop()
+            self.p02 = self.p_cur
+
         else:
             self.TimerUp.stop()
 
     def updateTime(self):
         self.time += 1
-        self.p_cur = self.vac_system.pump.start_pump(self.time)
+        self.p_cur = self.vac_system.pump.start_pump(self.time, self.p0)
         self.P.append(self.p_cur)
+        print self.P
         self.pressure_value.setText(str(round(self.p_cur, 2)))
         self.time1.setText(str(self.time))
+
+    def updateTime2(self):
+        self.time02 += 1
+        self.p_cur = self.vac_system.pump2.start_pump(self.time02, self.p02)
+        self.P.append(self.p_cur)
+        print self.P
+        self.pressure_value.setText(str(round(self.p_cur, 5)))
+        self.time2.setText(str(self.time02))
+
+
 
 
 if __name__ == "__main__":
@@ -103,6 +127,9 @@ if __name__ == "__main__":
     #ui.Enable.clicked.connect()
     ui.fl_pump.clicked.connect(ui.Enable_fl_pump)
     ui.valve3.clicked.connect(ui.Enable_valve_3)
+    ui.valve2.clicked.connect(ui.Enable_valve_2)
+    ui.valve1.clicked.connect(ui.Enable_valve_1)
+    ui.tm_pump.clicked.connect(ui.Enable_tm_pump)
 
     # run app
     sys.exit(app.exec_())

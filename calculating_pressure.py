@@ -63,15 +63,27 @@ def calculating_U_total(d, l, P1, P2):
         U = Umolec
     return U
 
-
-def calculating_forvacuum(Pcurr, t, name="forvacuum", S01=0.005, S02=0.09,
+Un = []
+def calculating_pressure(Pcurr, t, name, S01=0.005, S02=0.09,
                           V=0.04, Qin1=0.5, Qin2=0.0001,
                           d1=0.04, l1=0.8, d2=0.5, l2=0.3):
+
     if name == "forvacuum":
         Ucurr = calculating_U_total(d1, l1, 0, Pcurr)
+        Un.append(Ucurr)
         Seff = (S01 * Ucurr) / (S01 + Ucurr)
         Pmin = Qin1 / Seff
-        Pcurr = Pmin + (Pcurr - Pmin) * exp(-(Seff / V) * t)
+        Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.3 * (Seff / V) * t)
+        print Un
+        return Pcurr
+
+    elif name == "turbomolec":
+        Ucurr = calculating_U_total(d2, l2, 0, Pcurr)
+        Un.append(Ucurr)
+        Seff = (S02 * Ucurr) / (S02 + Ucurr)
+        Pmin = Qin2 / Seff
+        Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.05 * (Seff / V) * t)
+        print Un
         return Pcurr
 
 
