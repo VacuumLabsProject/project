@@ -26,7 +26,8 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.p_cur = self.p0
 
         self.setupUi(self)
-        self.time1.setText(str(self.time))
+        self.time_label1.setText(str(0))
+        self.time_label2.setText(str(0))
         self.pressure_value.setText(str(self.p0))
         self.show()
         # instantiation the vacuum system
@@ -102,7 +103,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.P.append(self.p_cur)
         print self.P
         self.pressure_value.setText(str(round(self.p_cur, 2)))
-        self.time1.setText(str(self.time))
+        self.time_label1.setText(str(self.time))
 
     def updateTime2(self):
         self.time02 += 1
@@ -110,7 +111,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.P.append(self.p_cur)
         print self.P
         self.pressure_value.setText(str(round(self.p_cur, 5)))
-        self.time2.setText(str(self.time02))
+        self.time_label2.setText(str(self.time02))
 
 
 
