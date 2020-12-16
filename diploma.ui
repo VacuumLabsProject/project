@@ -52,6 +52,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="valve1">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -86,6 +89,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="tm_pump">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -120,6 +126,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="valve2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -154,6 +163,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="fl_pump">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>590</x>
@@ -189,7 +201,7 @@
   </widget>
   <widget class="QPushButton" name="valve3">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>

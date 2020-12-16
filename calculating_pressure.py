@@ -74,7 +74,7 @@ def calculating_pressure(Pcurr, t, name, S01=0.005, S02=0.09,
         Seff = (S01 * Ucurr) / (S01 + Ucurr)
         Pmin = Qin1 / Seff
         Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.3 * (Seff / V) * t)
-        print Un
+        #print Un
         return Pcurr
 
     elif name == "turbomolec":
@@ -83,7 +83,7 @@ def calculating_pressure(Pcurr, t, name, S01=0.005, S02=0.09,
         Seff = (S02 * Ucurr) / (S02 + Ucurr)
         Pmin = Qin2 / Seff
         Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.05 * (Seff / V) * t)
-        print Un
+        #print Un
         return Pcurr
 
 

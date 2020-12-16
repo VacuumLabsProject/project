@@ -2,24 +2,25 @@
 
 # Form implementation generated from reading ui file 'C:\Users\khony\AppData\Local\Programs\Python\OOP_diploma\project\diploma.ui'
 #
-# Created: Sat Dec 12 17:10:03 2020
+# Created: Wed Dec 16 15:45:17 2020
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
 
 from PySide import QtCore, QtGui
 
+
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1165, 696)
         Form.setStyleSheet(".QWidget {\n"
-"    background-color: rgb(170, 255, 255);\n"
-"}\n"
-"\n"
-".QLabel, .QDial {\n"
-"    background-color: silver;\n"
-"}")
+                           "    background-color: rgb(170, 255, 255);\n"
+                           "}\n"
+                           "\n"
+                           ".QLabel, .QDial {\n"
+                           "    background-color: silver;\n"
+                           "}")
         self.vacuum_chamber = QtGui.QLabel(Form)
         self.vacuum_chamber.setGeometry(QtCore.QRect(40, 40, 681, 161))
         self.vacuum_chamber.setStyleSheet("")
@@ -30,6 +31,7 @@ class Ui_Form(object):
         self.tube_v1_chamber.setText("")
         self.tube_v1_chamber.setObjectName("tube_v1_chamber")
         self.valve1 = QtGui.QPushButton(Form)
+        self.valve1.setEnabled(False)
         self.valve1.setGeometry(QtCore.QRect(60, 310, 71, 81))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
@@ -43,6 +45,7 @@ class Ui_Form(object):
         self.tube_tm_v1.setText("")
         self.tube_tm_v1.setObjectName("tube_tm_v1")
         self.tm_pump = QtGui.QPushButton(Form)
+        self.tm_pump.setEnabled(False)
         self.tm_pump.setGeometry(QtCore.QRect(20, 500, 151, 161))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
@@ -56,6 +59,7 @@ class Ui_Form(object):
         self.tube_v2_tm.setText("")
         self.tube_v2_tm.setObjectName("tube_v2_tm")
         self.valve2 = QtGui.QPushButton(Form)
+        self.valve2.setEnabled(False)
         self.valve2.setGeometry(QtCore.QRect(340, 540, 71, 81))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
@@ -69,6 +73,7 @@ class Ui_Form(object):
         self.tube_fl_v2.setText("")
         self.tube_fl_v2.setObjectName("tube_fl_v2")
         self.fl_pump = QtGui.QPushButton(Form)
+        self.fl_pump.setEnabled(False)
         self.fl_pump.setGeometry(QtCore.QRect(590, 500, 151, 161))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
@@ -82,7 +87,7 @@ class Ui_Form(object):
         self.tube_fl_v3.setText("")
         self.tube_fl_v3.setObjectName("tube_fl_v3")
         self.valve3 = QtGui.QPushButton(Form)
-        self.valve3.setEnabled(True)
+        self.valve3.setEnabled(False)
         self.valve3.setGeometry(QtCore.QRect(630, 310, 71, 81))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
@@ -224,32 +229,52 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.valve1.setText(QtGui.QApplication.translate("Form", "V1", None, QtGui.QApplication.UnicodeUTF8))
-        self.tm_pump.setText(QtGui.QApplication.translate("Form", "TMP", None, QtGui.QApplication.UnicodeUTF8))
-        self.valve2.setText(QtGui.QApplication.translate("Form", "V2", None, QtGui.QApplication.UnicodeUTF8))
-        self.fl_pump.setText(QtGui.QApplication.translate("Form", "FLP", None, QtGui.QApplication.UnicodeUTF8))
-        self.valve3.setText(QtGui.QApplication.translate("Form", "V3", None, QtGui.QApplication.UnicodeUTF8))
-        self.Enable.setText(QtGui.QApplication.translate("Form", "Turn on power", None, QtGui.QApplication.UnicodeUTF8))
-        self.l_tm.setText(QtGui.QApplication.translate("Form", "l", None, QtGui.QApplication.UnicodeUTF8))
-        self.d_tm.setText(QtGui.QApplication.translate("Form", "d", None, QtGui.QApplication.UnicodeUTF8))
-        self.d_fl.setText(QtGui.QApplication.translate("Form", "d", None, QtGui.QApplication.UnicodeUTF8))
-        self.l_fl.setText(QtGui.QApplication.translate("Form", "l", None, QtGui.QApplication.UnicodeUTF8))
-        self.t1.setText(QtGui.QApplication.translate("Form", "t1", None, QtGui.QApplication.UnicodeUTF8))
-        self.t2.setText(QtGui.QApplication.translate("Form", "t2", None, QtGui.QApplication.UnicodeUTF8))
-        self.time_rewind.setText(QtGui.QApplication.translate("Form", "time", None, QtGui.QApplication.UnicodeUTF8))
-        self.p.setText(QtGui.QApplication.translate("Form", "p", None, QtGui.QApplication.UnicodeUTF8))
-        self.Q_tm.setText(QtGui.QApplication.translate("Form", "Qin", None, QtGui.QApplication.UnicodeUTF8))
-        self.Q_fl.setText(QtGui.QApplication.translate("Form", "Qin", None, QtGui.QApplication.UnicodeUTF8))
-        self.V_chamber.setText(QtGui.QApplication.translate("Form", "V", None, QtGui.QApplication.UnicodeUTF8))
+        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None,
+                                                         QtGui.QApplication.UnicodeUTF8))
+        self.valve1.setText(QtGui.QApplication.translate("Form", "V1", None,
+                                                         QtGui.QApplication.UnicodeUTF8))
+        self.tm_pump.setText(QtGui.QApplication.translate("Form", "TMP", None,
+                                                          QtGui.QApplication.UnicodeUTF8))
+        self.valve2.setText(QtGui.QApplication.translate("Form", "V2", None,
+                                                         QtGui.QApplication.UnicodeUTF8))
+        self.fl_pump.setText(QtGui.QApplication.translate("Form", "FLP", None,
+                                                          QtGui.QApplication.UnicodeUTF8))
+        self.valve3.setText(QtGui.QApplication.translate("Form", "V3", None,
+                                                         QtGui.QApplication.UnicodeUTF8))
+        self.Enable.setText(
+            QtGui.QApplication.translate("Form", "Turn on power", None,
+                                         QtGui.QApplication.UnicodeUTF8))
+        self.l_tm.setText(QtGui.QApplication.translate("Form", "l", None,
+                                                       QtGui.QApplication.UnicodeUTF8))
+        self.d_tm.setText(QtGui.QApplication.translate("Form", "d", None,
+                                                       QtGui.QApplication.UnicodeUTF8))
+        self.d_fl.setText(QtGui.QApplication.translate("Form", "d", None,
+                                                       QtGui.QApplication.UnicodeUTF8))
+        self.l_fl.setText(QtGui.QApplication.translate("Form", "l", None,
+                                                       QtGui.QApplication.UnicodeUTF8))
+        self.t1.setText(QtGui.QApplication.translate("Form", "t1", None,
+                                                     QtGui.QApplication.UnicodeUTF8))
+        self.t2.setText(QtGui.QApplication.translate("Form", "t2", None,
+                                                     QtGui.QApplication.UnicodeUTF8))
+        self.time_rewind.setText(
+            QtGui.QApplication.translate("Form", "time", None,
+                                         QtGui.QApplication.UnicodeUTF8))
+        self.p.setText(QtGui.QApplication.translate("Form", "p", None,
+                                                    QtGui.QApplication.UnicodeUTF8))
+        self.Q_tm.setText(QtGui.QApplication.translate("Form", "Qin", None,
+                                                       QtGui.QApplication.UnicodeUTF8))
+        self.Q_fl.setText(QtGui.QApplication.translate("Form", "Qin", None,
+                                                       QtGui.QApplication.UnicodeUTF8))
+        self.V_chamber.setText(QtGui.QApplication.translate("Form", "V", None,
+                                                            QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtGui.QApplication(sys.argv)
     Form = QtGui.QWidget()
     ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-
