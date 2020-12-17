@@ -43,13 +43,15 @@ class Pump:
         elif type_of_pump == "turbomolec":
             return "turbomolec"
 
-    def start_pump(self, time, p0):
+    def start_pump(self, time, p0, S01, S02,
+                          V, Qin1, Qin2,
+                          d1, l1, d2, l2):
         if self.type == "forevac":
-            p = calculating_pressure.calculating_pressure(p0, time, name="forvacuum")
+            p = calculating_pressure.calculating_pressure(p0, time, name="forvacuum", S01=S01, S02=S02, V=V, Qin1=Qin1, Qin2=Qin2, d1=d1, l1=l1, d2=d2, l2=l2)
             return p
 
         elif self.type == "turbomolec":
-            p = calculating_pressure.calculating_pressure(p0, time, name="turbomolec")
+            p = calculating_pressure.calculating_pressure(p0, time, name="turbomolec", S01=S01, S02=S02, V=V, Qin1=Qin1, Qin2=Qin2, d1=d1, l1=l1, d2=d2, l2=l2)
             return p
 
         else:

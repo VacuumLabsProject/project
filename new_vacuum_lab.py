@@ -102,20 +102,35 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.valve2.setEnabled(True)
             self.Timer_on()
 
-    def Timer_tm_pump(self):
-        global v1_but
+    # Fake timer, that runs when timeSlider switched
+    # while activating or deactivating tm pump
+    def FakeTimer(self):
+        global tm_but
         self.TimerTmPump = QtCore.QTimer()  # do not move to __init__
-        if not self.valve1.isEnabled():
-            self.TimerTmPump.start()
-            self.t = random.randint(720, 900)
-            self.TimerTmPump.setInterval(self.time_interval)
+        self.TimerTmPump.start()
+        if not self.valve1.isEnabled() and self.t > 0 and tm_but == "on":
+            self.TimerTmPump.setInterval(
+                self.time_interval * self.timeSlider.value())
             self.TimerTmPump.timeout.connect(self.count_time)
+
+        elif not self.valve1.isEnabled() and self.t > 0 and tm_but == "off":
+            self.TimerTmPump.setInterval(
+                self.time_interval * self.timeSlider.value())
+            self.TimerTmPump.timeout.connect(self.count_time2)
+
+    def Timer_tm_pump(self):
+        self.TimerTmPump = QtCore.QTimer()  # do not move to __init__
+        self.TimerTmPump.start()
+        if not self.valve1.isEnabled():
+            self.t = random.randint(720, 900)
+            self.TimerTmPump.setInterval(self.time_interval*self.timeSlider.value())
+            self.TimerTmPump.timeout.connect(self.count_time)
+
         elif self.valve1.isEnabled():
-            self.TimerTmPump.start()
             self.t = random.randint(720, 900)
             self.valve1.setEnabled(False)
             self.valve2.setEnabled(False)
-            self.TimerTmPump.setInterval(self.time_interval)
+            self.TimerTmPump.setInterval(self.time_interval*self.timeSlider.value())
             self.TimerTmPump.timeout.connect(self.count_time2)
 
     def count_time(self):
@@ -138,12 +153,12 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.TimerUp = QtCore.QTimer()  # do not move to __init__
         if fl_but == "on" and v3_but == "on":
             self.TimerUp.start()
-            self.TimerUp.setInterval(self.time_interval)
+            self.TimerUp.setInterval(self.time_interval*self.timeSlider.value())
             self.TimerUp.timeout.connect(self.updateTime)
 
         elif fl_but == "on" and tm_but == "on" and v2_but == "on" and v1_but == "on" and v3_but == "off":
             self.TimerUp.start()
-            self.TimerUp.setInterval(self.time_interval)
+            self.TimerUp.setInterval(self.time_interval*self.timeSlider.value())
             self.TimerUp.timeout.connect(self.updateTime2)
 
         elif fl_but == "on" and v3_but == "off" and v2_but == "off":
@@ -155,7 +170,17 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
 
     def updateTime(self):
         self.time += 1
-        self.p_cur = self.vac_system.pump.start_pump(self.time, self.p0)
+        self.p_cur = self.vac_system.pump.start_pump(self.time,
+                                                     self.p0,
+                                                     S01=self.spinbox_S1.value(),
+                                                     S02=self.spinbox_S2.value(),
+                                                     V=self.spinbox_V.value(),
+                                                     Qin1=self.spinbox_Qin1.value(),
+                                                     Qin2=self.spinbox_Qin2.value(),
+                                                     d1=self.spinbox_d_fl.value(),
+                                                     l1=self.spinbox_l_fl.value(),
+                                                     d2=self.spinbox_d_tm.value(),
+                                                     l2=self.spinbox_d_tm.value())
         self.P.append(self.p_cur)
         #print self.P
         self.pressure_value.setText(str(round(self.p_cur, 2)))
@@ -163,13 +188,29 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
 
     def updateTime2(self):
         self.time02 += 1
-        self.p_cur = self.vac_system.pump2.start_pump(self.time02, self.p02)
+        self.p_cur = self.vac_system.pump2.start_pump(self.time02,
+                                                      self.p02,
+                                                      S01=self.spinbox_S1.value(),
+                                                      S02=self.spinbox_S2.value(),
+                                                      V=self.spinbox_V.value(),
+                                                      Qin1=self.spinbox_Qin1.value(),
+                                                      Qin2=self.spinbox_Qin2.value(),
+                                                      d1=self.spinbox_d_fl.value(),
+                                                      l1=self.spinbox_l_fl.value(),
+                                                      d2=self.spinbox_d_tm.value(),
+                                                      l2=self.spinbox_d_tm.value()
+                                                      )
         self.P.append(self.p_cur)
         #print self.P
         self.pressure_value.setText(str(round(self.p_cur, 5)))
         self.time_label2.setText(str(self.time02))
 
-
+    def chose_time(self):
+        globals()
+        if fl_but == "on" and v3_but == "on" and v2_but == "off" and v1_but == "off" and tm_but == "off" or fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "on" and tm_but == "on":
+            self.Timer_on()
+        elif fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "off" or fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "on":
+            self.FakeTimer()
 
 
 if __name__ == "__main__":
@@ -187,6 +228,7 @@ if __name__ == "__main__":
     ui.valve2.clicked.connect(ui.Enable_valve_2)
     ui.valve1.clicked.connect(ui.Enable_valve_1)
     ui.tm_pump.clicked.connect(ui.Enable_tm_pump)
+    ui.timeSlider.valueChanged.connect(ui.chose_time)
 
     # run app
     sys.exit(app.exec_())
