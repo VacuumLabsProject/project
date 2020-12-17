@@ -126,6 +126,7 @@ class Ui_Form(object):
         self.spinbox_d_fl.setGeometry(QtCore.QRect(510, 470, 62, 22))
         self.spinbox_d_fl.setMinimum(0.01)
         self.spinbox_d_fl.setMaximum(10.0)
+        self.spinbox_d_fl.setSingleStep(0.01)
         self.spinbox_d_fl.setProperty("value", 0.04)
         self.spinbox_d_fl.setObjectName("spinbox_d_fl")
         self.time_label1 = QtGui.QLineEdit(Form)
