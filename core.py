@@ -1,4 +1,3 @@
-import time
 import calculating_pressure
 
 
@@ -57,7 +56,8 @@ class Pump:
         else:
             print "something does not connected"
 
-    # pump.start_pump()
-    # pump2.start_pump()
-    # valve_between_chamber_and_pump_2.open()
-    # pump2.start_pump()
+    def overflow(self, time):
+        p = calculating_pressure.calculate_overflow(time)
+        return p
+
+

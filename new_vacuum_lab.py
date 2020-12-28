@@ -14,6 +14,7 @@ v2_but = "off"
 v3_but = "off"
 tm_but = "off"
 enable = "off"
+overflow = "off"
 
 
 class MainWindow(QtGui.QMainWindow, Ui_Form):
@@ -22,6 +23,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.P = [100000]
         self.time = 0
         self.time02 = 0
+        self.time03 = 0
         self.time_interval = 10
         self.p0 = 100000
         self.p02 = 133
@@ -40,10 +42,12 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         if enable == "off":
             enable = "on"
             self.fl_pump.setEnabled(True)
+            self.overflow.setEnabled(True)
 
         elif enable == "on":
             enable = "off"
             self.fl_pump.setEnabled(False)
+            self.overflow.setEnabled(False)
 
     def Enable_fl_pump(self):
         global fl_but
@@ -73,9 +77,11 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         global v1_but
         if v1_but == "off":
             v1_but = "on"
+            self.overflow.setEnabled(False)
             self.Timer_on()
         else:
             v1_but = "off"
+            self.overflow.setEnabled(True)
             self.Timer_on()
 
     def Enable_valve_2(self):
@@ -95,10 +101,12 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         global v3_but
         if v3_but == "off":
             v3_but = "on"
+            self.overflow.setEnabled(False)
             self.valve2.setEnabled(False)
             self.Timer_on()
         else:
             v3_but = "off"
+            self.overflow.setEnabled(True)
             self.valve2.setEnabled(True)
             self.Timer_on()
 
@@ -108,12 +116,12 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         global tm_but
         self.TimerTmPump = QtCore.QTimer()  # do not move to __init__
         self.TimerTmPump.start()
-        if not self.valve1.isEnabled() and self.t > 0 and tm_but == "on":
+        if not self.valve1.isEnabled() and self.p_cur < 133 and tm_but == "on":
             self.TimerTmPump.setInterval(
                 self.time_interval * self.timeSlider.value())
             self.TimerTmPump.timeout.connect(self.count_time)
 
-        elif not self.valve1.isEnabled() and self.t > 0 and tm_but == "off":
+        elif not self.valve1.isEnabled() and self.p_cur < 133 and tm_but == "off":
             self.TimerTmPump.setInterval(
                 self.time_interval * self.timeSlider.value())
             self.TimerTmPump.timeout.connect(self.count_time2)
@@ -121,7 +129,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
     def Timer_tm_pump(self):
         self.TimerTmPump = QtCore.QTimer()  # do not move to __init__
         self.TimerTmPump.start()
-        if not self.valve1.isEnabled():
+        if not self.valve1.isEnabled() and self.p_cur < 133:
             self.t = random.randint(720, 900)
             self.TimerTmPump.setInterval(self.time_interval*self.timeSlider.value())
             self.TimerTmPump.timeout.connect(self.count_time)
@@ -135,7 +143,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
 
     def count_time(self):
         self.t -= 1
-        print self.t
+        # print self.t
         if self.t == 0:
             self.readiness.setStyleSheet("background-color: green;")
             self.valve1.setEnabled(True)
@@ -143,7 +151,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
 
     def count_time2(self):
         self.t -= 1
-        print self.t
+        # print self.t
         if self.t == 0:
             self.readiness.setStyleSheet("background-color: red;")
             self.valve2.setEnabled(True)
@@ -182,7 +190,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
                                                      d2=self.spinbox_d_tm.value(),
                                                      l2=self.spinbox_d_tm.value())
         self.P.append(self.p_cur)
-        #print self.P
+        # print self.P
         self.pressure_value.setText(str(round(self.p_cur, 2)))
         self.time_label1.setText(str(self.time))
 
@@ -211,6 +219,31 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.Timer_on()
         elif fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "off" or fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "on":
             self.FakeTimer()
+        elif overflow == "on" and int(self.p_cur) == self.p0:
+            pass
+        elif overflow == "on":
+            self.updateOverflow()
+
+    def overflow_but(self):
+        global overflow
+        self.TimerOverflow = QtCore.QTimer()  # do not move to __init__
+        if overflow == "off":
+            overflow = "on"
+            self.TimerOverflow.start()
+            self.TimerOverflow.setInterval(
+                self.time_interval * self.timeSlider.value())
+            self.TimerOverflow.timeout.connect(self.updateOverflow)
+        else:
+            overflow = "off"
+            self.TimerOverflow.stop()
+
+    def updateOverflow(self):
+        self.time03 += 1
+        self.p_cur = self.vac_system.pump.overflow(self.time03)
+        self.P.append(self.p_cur)
+        self.pressure_value.setText(str(round(self.p_cur, 0)))
+        if int(self.p_cur) == self.p0:
+            self.TimerOverflow.stop()
 
 
 if __name__ == "__main__":
@@ -229,6 +262,8 @@ if __name__ == "__main__":
     ui.valve1.clicked.connect(ui.Enable_valve_1)
     ui.tm_pump.clicked.connect(ui.Enable_tm_pump)
     ui.timeSlider.valueChanged.connect(ui.chose_time)
+    ui.overflow.clicked.connect(ui.overflow_but)
+
 
     # run app
     sys.exit(app.exec_())

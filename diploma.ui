@@ -270,16 +270,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QDial" name="dial">
-   <property name="geometry">
-    <rect>
-     <x>790</x>
-     <y>20</y>
-     <width>50</width>
-     <height>64</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QDoubleSpinBox" name="spinbox_l_fl">
    <property name="geometry">
     <rect>
@@ -901,6 +891,19 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="overflow">
+   <property name="geometry">
+    <rect>
+     <x>790</x>
+     <y>30</y>
+     <width>51</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Air</string>
    </property>
   </widget>
  </widget>

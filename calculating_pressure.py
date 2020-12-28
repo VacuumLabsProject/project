@@ -11,7 +11,8 @@ def calculating_U_viscous(d, l, P1, P2):
         Uhole = 157 * d ** 2 * (1 / (1 - alpha))
     else:
         Uhole = 157 * d ** 2
-    Ushort = (sqrt(1 + 0.12 * Ulong * ((P2 - P1) / l)) - 1) / (0.06 * ((P2 - P1) / l))
+    Ushort = (sqrt(1 + 0.12 * Ulong * ((P2 - P1) / l)) - 1) / (
+                0.06 * ((P2 - P1) / l))
     Uvisc = choosing_U_viscous(d, l, Ulong, Ushort, Uhole)
     return Uvisc
 
@@ -31,7 +32,8 @@ def calculatung_U_molecular(d, l):
     Ulong = 121 * d ** 3 / l
     Uhole = 91 * d ** 2
     K = 1 / (1 + 0.752 * (l / d))
-    a = (15 * (l / d) + 12 * (l / d) ** 2) / (20 + 38 * (l / d) + 12 * (l / d) ** 2)
+    a = (15 * (l / d) + 12 * (l / d) ** 2) / (
+                20 + 38 * (l / d) + 12 * (l / d) ** 2)
     if l / d > 20:
         Ushort = Uhole * K
     else:
@@ -63,18 +65,20 @@ def calculating_U_total(d, l, P1, P2):
         U = Umolec
     return U
 
-Un = []
-def calculating_pressure(Pcurr, t, name, S01, S02,
-                          V, Qin1, Qin2,
-                          d1, l1, d2, l2):
 
+Un = []
+
+
+def calculating_pressure(Pcurr, t, name, S01, S02,
+                         V, Qin1, Qin2,
+                         d1, l1, d2, l2):
     if name == "forvacuum":
         Ucurr = calculating_U_total(d1, l1, 0, Pcurr)
         Un.append(Ucurr)
         Seff = (S01 * Ucurr) / (S01 + Ucurr)
         Pmin = Qin1 / Seff
         Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.07 * (Seff / V) * t)
-        #print Un
+        # print Un
         return Pcurr
 
     elif name == "turbomolec":
@@ -83,7 +87,10 @@ def calculating_pressure(Pcurr, t, name, S01, S02,
         Seff = (S02 * Ucurr) / (S02 + Ucurr)
         Pmin = Qin2 / Seff
         Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.01 * (Seff / V) * t)
-        #print Un
+        # print Un
         return Pcurr
 
 
+def calculate_overflow(t):
+    P = 100000 * (1 - exp(-0.5 * t))
+    return P
