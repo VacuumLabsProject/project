@@ -91,6 +91,6 @@ def calculating_pressure(Pcurr, t, name, S01, S02,
         return Pcurr
 
 
-def calculate_overflow(t):
-    P = 100000 * (1 - exp(-0.5 * t))
+def calculate_overflow(t, pcur):
+    P = 100000 - (100000 - pcur) * exp(-0.5 * t)
     return P

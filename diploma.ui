@@ -11,15 +11,23 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Vacuum system research</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon.png</normaloff>icon.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">.QWidget {
-	background-color: rgb(170, 255, 255);
+   <string notr="true">QWidget {
+	background-color: rgb(200, 255, 255);
 }
 
-.QLabel, .QDial {
-	background-color: silver;
+.QLabel, .QDial, .QPushButton {
+	background-color: rgb(204, 204, 204);
+}
+
+.QDoubleSpinBox, .QLineEdit {
+	background-color: white
 }</string>
   </property>
   <widget class="QLabel" name="vacuum_chamber">
@@ -902,8 +910,52 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>Air</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="status">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>210</y>
+     <width>211</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string>Power off</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
