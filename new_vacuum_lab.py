@@ -29,12 +29,6 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.p02 = 133
         self.p_cur = self.p0
 
-        #font = QtGui.QFont()
-        #font.setFamily("Times New Roman")
-        #font.setPointSize(10)
-        #font.setWeight(75)
-        #font.setBold(True)
-
         # determination of the moment of switching on of overflow
         self.q1 = 0
         self.q2 = 0
@@ -46,10 +40,6 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.show()
         # instantiation the vacuum system
         self.vac_system = vacuum_system.VacuumSystem(self.p0)
-
-        #self.status.setAlignment(QtCore.Qt.AlignCenter)
-        #self.status.setFont(font)
-        #self.status.setText("Power off")
 
     def Enable_but(self):
         global enable
@@ -220,6 +210,10 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.P.append(self.p_cur)
         # print self.P
         self.pressure_value.setText(str(round(self.p_cur, 2)))
+        if self.p_cur > 133:
+            self.progressBar.setValue(self.p_cur)
+        else:
+            self.progressBar_2.setValue(self.p_cur)
         self.time_label1.setText(str(self.time))
 
     def updateTime2(self):
@@ -239,6 +233,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.P.append(self.p_cur)
         #print self.P
         self.pressure_value.setText(str(round(self.p_cur, 5)))
+        self.progressBar_2.setValue(self.p_cur)
         self.time_label2.setText(str(self.time02))
 
     # running time-slider
@@ -246,8 +241,10 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         globals()
         if fl_but == "on" and v3_but == "on" and v2_but == "off" and v1_but == "off" and tm_but == "off" or fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "on" and tm_but == "on":
             self.Timer_on()
-        elif fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "off" or fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "on":
+        elif fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "on":
             self.FakeTimer()
+        elif fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "off":
+            pass
         elif overflow == "on" and int(self.p_cur) == self.p0:
             pass
         elif overflow == "on":
@@ -288,6 +285,9 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.time03 += 1
         self.p_cur = self.vac_system.pump.overflow(self.time03, self.p_cur)
         self.P.append(self.p_cur)
+
+        self.progressBar_2.setValue(133)
+        self.progressBar.setValue(self.p_cur)
         self.pressure_value.setText(str(round(self.p_cur, 0)))
         if int(self.p_cur) == self.p0:
             self.time = 0
