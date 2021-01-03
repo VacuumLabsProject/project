@@ -6,9 +6,6 @@ from PySide import QtGui, QtCore
 import vacuum_system
 from diploma_vaporization import Ui_Form
 
-import edit_while_chamber_is_open
-import vaporization_calculation
-
 fl_but = "off"
 v1_but = "off"
 v2_but = "off"
