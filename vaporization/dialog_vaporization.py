@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\khony\AppData\Local\Programs\Python\OOP_diploma\project\dialog_vaporization.ui'
+# Form implementation generated from reading ui file 'C:\Users\khony\AppData\Local\Programs\Python\OOP_diploma\project\vaporization\dialog_vaporization.ui'
 #
-# Created: Sun Jan 03 14:22:40 2021
+# Created: Thu Jan 07 17:45:57 2021
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PySide import QtCore, QtGui
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(630, 448)
+        Dialog.resize(770, 549)
         self.current = QtGui.QLineEdit(Dialog)
         self.current.setGeometry(QtCore.QRect(10, 100, 51, 41))
         font = QtGui.QFont()
@@ -198,6 +198,63 @@ class Ui_Dialog(object):
         self.K.setFont(font)
         self.K.setAlignment(QtCore.Qt.AlignCenter)
         self.K.setObjectName("K")
+        self.x100 = QtGui.QLabel(Dialog)
+        self.x100.setGeometry(QtCore.QRect(300, 440, 41, 21))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(10)
+        font.setWeight(75)
+        font.setBold(True)
+        self.x100.setFont(font)
+        self.x100.setAlignment(QtCore.Qt.AlignCenter)
+        self.x100.setObjectName("x100")
+        self.time_rewind = QtGui.QLabel(Dialog)
+        self.time_rewind.setGeometry(QtCore.QRect(310, 340, 91, 41))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(14)
+        font.setWeight(75)
+        font.setBold(True)
+        self.time_rewind.setFont(font)
+        self.time_rewind.setAlignment(QtCore.Qt.AlignCenter)
+        self.time_rewind.setObjectName("time_rewind")
+        self.timeSlider = QtGui.QSlider(Dialog)
+        self.timeSlider.setGeometry(QtCore.QRect(310, 400, 241, 31))
+        self.timeSlider.setCursor(QtCore.Qt.OpenHandCursor)
+        self.timeSlider.setMouseTracking(False)
+        self.timeSlider.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
+        self.timeSlider.setMinimum(1)
+        self.timeSlider.setMaximum(200)
+        self.timeSlider.setSingleStep(1)
+        self.timeSlider.setProperty("value", 100)
+        self.timeSlider.setSliderPosition(100)
+        self.timeSlider.setTracking(True)
+        self.timeSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.timeSlider.setInvertedAppearance(False)
+        self.timeSlider.setInvertedControls(False)
+        self.timeSlider.setTickPosition(QtGui.QSlider.TicksBelow)
+        self.timeSlider.setTickInterval(50)
+        self.timeSlider.setObjectName("timeSlider")
+        self.x1 = QtGui.QLabel(Dialog)
+        self.x1.setGeometry(QtCore.QRect(410, 440, 41, 21))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(10)
+        font.setWeight(75)
+        font.setBold(True)
+        self.x1.setFont(font)
+        self.x1.setAlignment(QtCore.Qt.AlignCenter)
+        self.x1.setObjectName("x1")
+        self.x0_5 = QtGui.QLabel(Dialog)
+        self.x0_5.setGeometry(QtCore.QRect(520, 440, 41, 21))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(10)
+        font.setWeight(75)
+        font.setBold(True)
+        self.x0_5.setFont(font)
+        self.x0_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.x0_5.setObjectName("x0_5")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -213,12 +270,16 @@ class Ui_Dialog(object):
         self.temperature.setText(QtGui.QApplication.translate("Dialog", "293", None, QtGui.QApplication.UnicodeUTF8))
         self.current_tempeature_label.setText(QtGui.QApplication.translate("Dialog", "Current temperature, K", None, QtGui.QApplication.UnicodeUTF8))
         self.heat.setText(QtGui.QApplication.translate("Dialog", "Heat", None, QtGui.QApplication.UnicodeUTF8))
-        self.d0_label.setText(QtGui.QApplication.translate("Dialog", "d0, mсm", None, QtGui.QApplication.UnicodeUTF8))
+        self.d0_label.setText(QtGui.QApplication.translate("Dialog", "d0, nm", None, QtGui.QApplication.UnicodeUTF8))
         self.d0.setText(QtGui.QApplication.translate("Dialog", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.dr_label.setText(QtGui.QApplication.translate("Dialog", "dr, mсm", None, QtGui.QApplication.UnicodeUTF8))
+        self.dr_label.setText(QtGui.QApplication.translate("Dialog", "dr, nm", None, QtGui.QApplication.UnicodeUTF8))
         self.dr.setText(QtGui.QApplication.translate("Dialog", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.k_label.setText(QtGui.QApplication.translate("Dialog", "K", None, QtGui.QApplication.UnicodeUTF8))
         self.K.setText(QtGui.QApplication.translate("Dialog", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.x100.setText(QtGui.QApplication.translate("Dialog", "x100", None, QtGui.QApplication.UnicodeUTF8))
+        self.time_rewind.setText(QtGui.QApplication.translate("Dialog", "time", None, QtGui.QApplication.UnicodeUTF8))
+        self.x1.setText(QtGui.QApplication.translate("Dialog", "x1", None, QtGui.QApplication.UnicodeUTF8))
+        self.x0_5.setText(QtGui.QApplication.translate("Dialog", "x0.5", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

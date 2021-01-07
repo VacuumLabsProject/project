@@ -85,7 +85,7 @@
     <string notr="true">background-color: rgb(210, 210, 210)</string>
    </property>
    <property name="text">
-    <string>h, m</string>
+    <string>h, cm</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -107,7 +107,7 @@
     </font>
    </property>
    <property name="maximum">
-    <double>1.000000000000000</double>
+    <double>20.000000000000000</double>
    </property>
    <property name="singleStep">
     <double>0.010000000000000</double>
@@ -129,10 +129,13 @@
     </font>
    </property>
    <property name="decimals">
-    <number>1</number>
+    <number>3</number>
    </property>
    <property name="maximum">
-    <double>999.000000000000000</double>
+    <double>9.999000000000001</double>
+   </property>
+   <property name="singleStep">
+    <double>0.001000000000000</double>
    </property>
   </widget>
   <widget class="QLabel" name="m_label">
@@ -176,7 +179,7 @@
     </font>
    </property>
    <property name="maximum">
-    <double>0.500000000000000</double>
+    <double>10.000000000000000</double>
    </property>
    <property name="singleStep">
     <double>0.010000000000000</double>
@@ -201,7 +204,7 @@
     <string notr="true">background-color: rgb(210, 210, 210)</string>
    </property>
    <property name="text">
-    <string>r, m</string>
+    <string>r, cm</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
