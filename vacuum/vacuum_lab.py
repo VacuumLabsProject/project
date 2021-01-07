@@ -1,10 +1,12 @@
-import random
-import sys
-
 from PySide import QtGui, QtCore
-
+from diploma import Ui_Form
+from numpy import exp
+import sys
 import vacuum_system
-from diploma_vaporization import Ui_Form
+import time
+import calculating_pressure
+import core
+import random
 
 fl_but = "off"
 v1_but = "off"
@@ -13,18 +15,7 @@ v3_but = "off"
 tm_but = "off"
 enable = "off"
 overflow = "off"
-
-
-def open_chamber_but():
-    import edit_while_chamber_is_open
-    import vaporization_calculation
-    info = edit_while_chamber_is_open.New_Window()
-    h = info.distance.value()
-    r = info.radius.value()
-    material = info.comboBox.currentText()
-    mass = info.weight.value()
-    vaporization_calculation.Vaporization_Window(h=h, r=r, material=material, mass=mass)
-
+ready = "red"
 
 
 class MainWindow(QtGui.QMainWindow, Ui_Form):
@@ -164,19 +155,23 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.TimerTmPump.timeout.connect(self.count_time2)
 
     def count_time(self):
+        global ready
         self.t -= 1
         # print self.t
         if self.t == 0:
             self.readiness.setStyleSheet("background-color: green;")
+            ready = "green"
             self.status.setText("Enabled high vacuum pump")
             self.valve1.setEnabled(True)
             self.TimerTmPump.stop()
 
     def count_time2(self):
+        global ready
         self.t -= 1
         # print self.t
         if self.t == 0:
             self.readiness.setStyleSheet("background-color: red;")
+            ready = "red"
             self.status.setText("Disabled high vacuum pump")
             self.valve2.setEnabled(True)
             self.TimerTmPump.stop()
@@ -220,6 +215,10 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.P.append(self.p_cur)
         # print self.P
         self.pressure_value.setText(str(round(self.p_cur, 2)))
+        if self.p_cur > 133:
+            self.progressBar.setValue(self.p_cur)
+        else:
+            self.progressBar_2.setValue(self.p_cur)
         self.time_label1.setText(str(self.time))
 
     def updateTime2(self):
@@ -239,6 +238,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.P.append(self.p_cur)
         #print self.P
         self.pressure_value.setText(str(round(self.p_cur, 5)))
+        self.progressBar_2.setValue(self.p_cur)
         self.time_label2.setText(str(self.time02))
 
     # running time-slider
@@ -248,8 +248,8 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.Timer_on()
         elif fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "on":
             self.FakeTimer()
-        elif fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "off":
-            pass
+        elif fl_but == "on" and v3_but == "off" and v2_but == "on" and v1_but == "off" and tm_but == "off" and ready == "green":
+            self.FakeTimer()
         elif overflow == "on" and int(self.p_cur) == self.p0:
             pass
         elif overflow == "on":
@@ -291,6 +291,8 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.p_cur = self.vac_system.pump.overflow(self.time03, self.p_cur)
         self.P.append(self.p_cur)
 
+        self.progressBar_2.setValue(133)
+        self.progressBar.setValue(self.p_cur)
         self.pressure_value.setText(str(round(self.p_cur, 0)))
         if int(self.p_cur) == self.p0:
             self.time = 0
@@ -307,6 +309,7 @@ if __name__ == "__main__":
     ui = MainWindow()
 
     # logic
+
     ui.Enable.clicked.connect(ui.Enable_but)
     ui.fl_pump.clicked.connect(ui.Enable_fl_pump)
     ui.valve3.clicked.connect(ui.Enable_valve_3)
@@ -315,7 +318,7 @@ if __name__ == "__main__":
     ui.tm_pump.clicked.connect(ui.Enable_tm_pump)
     ui.timeSlider.valueChanged.connect(ui.chose_time)
     ui.overflow.clicked.connect(ui.overflow_but)
-    ui.openChamber.clicked.connect(open_chamber_but)
+
 
     # run app
     sys.exit(app.exec_())
