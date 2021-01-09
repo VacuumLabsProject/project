@@ -252,10 +252,13 @@
    </property>
   </widget>
   <widget class="QPushButton" name="Enable">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>890</x>
-     <y>10</y>
+     <y>0</y>
      <width>251</width>
      <height>81</height>
     </rect>
@@ -936,6 +939,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="overflow">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -1030,6 +1036,30 @@
    </property>
    <property name="scaledContents">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="calculatingFilm">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>160</y>
+     <width>191</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Calculating film</string>
    </property>
   </widget>
  </widget>

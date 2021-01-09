@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\khony\AppData\Local\Programs\Python\OOP_diploma\project\vaporization\dialog_vaporization.ui'
 #
-# Created: Thu Jan 07 17:45:57 2021
+# Created: Sat Jan 09 13:41:37 2021
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -139,7 +139,7 @@ class Ui_Dialog(object):
         self.damper_state.setText("")
         self.damper_state.setObjectName("damper_state")
         self.d0_label = QtGui.QLabel(Dialog)
-        self.d0_label.setGeometry(QtCore.QRect(280, 120, 71, 31))
+        self.d0_label.setGeometry(QtCore.QRect(280, 160, 71, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(10)
@@ -149,7 +149,7 @@ class Ui_Dialog(object):
         self.d0_label.setAlignment(QtCore.Qt.AlignCenter)
         self.d0_label.setObjectName("d0_label")
         self.d0 = QtGui.QLineEdit(Dialog)
-        self.d0.setGeometry(QtCore.QRect(350, 120, 101, 31))
+        self.d0.setGeometry(QtCore.QRect(350, 160, 101, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
@@ -159,7 +159,7 @@ class Ui_Dialog(object):
         self.d0.setAlignment(QtCore.Qt.AlignCenter)
         self.d0.setObjectName("d0")
         self.dr_label = QtGui.QLabel(Dialog)
-        self.dr_label.setGeometry(QtCore.QRect(280, 160, 71, 31))
+        self.dr_label.setGeometry(QtCore.QRect(280, 200, 71, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(10)
@@ -169,7 +169,7 @@ class Ui_Dialog(object):
         self.dr_label.setAlignment(QtCore.Qt.AlignCenter)
         self.dr_label.setObjectName("dr_label")
         self.dr = QtGui.QLineEdit(Dialog)
-        self.dr.setGeometry(QtCore.QRect(350, 160, 101, 31))
+        self.dr.setGeometry(QtCore.QRect(350, 200, 101, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
@@ -179,7 +179,7 @@ class Ui_Dialog(object):
         self.dr.setAlignment(QtCore.Qt.AlignCenter)
         self.dr.setObjectName("dr")
         self.k_label = QtGui.QLabel(Dialog)
-        self.k_label.setGeometry(QtCore.QRect(280, 200, 71, 31))
+        self.k_label.setGeometry(QtCore.QRect(280, 240, 71, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(10)
@@ -189,7 +189,7 @@ class Ui_Dialog(object):
         self.k_label.setAlignment(QtCore.Qt.AlignCenter)
         self.k_label.setObjectName("k_label")
         self.K = QtGui.QLineEdit(Dialog)
-        self.K.setGeometry(QtCore.QRect(350, 200, 101, 31))
+        self.K.setGeometry(QtCore.QRect(350, 240, 101, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
@@ -255,6 +255,26 @@ class Ui_Dialog(object):
         self.x0_5.setFont(font)
         self.x0_5.setAlignment(QtCore.Qt.AlignCenter)
         self.x0_5.setObjectName("x0_5")
+        self.time_label = QtGui.QLabel(Dialog)
+        self.time_label.setGeometry(QtCore.QRect(280, 120, 71, 31))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(10)
+        font.setWeight(75)
+        font.setBold(True)
+        self.time_label.setFont(font)
+        self.time_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.time_label.setObjectName("time_label")
+        self.t = QtGui.QLineEdit(Dialog)
+        self.t.setGeometry(QtCore.QRect(350, 120, 101, 31))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(12)
+        font.setWeight(75)
+        font.setBold(True)
+        self.t.setFont(font)
+        self.t.setAlignment(QtCore.Qt.AlignCenter)
+        self.t.setObjectName("t")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -280,6 +300,8 @@ class Ui_Dialog(object):
         self.time_rewind.setText(QtGui.QApplication.translate("Dialog", "time", None, QtGui.QApplication.UnicodeUTF8))
         self.x1.setText(QtGui.QApplication.translate("Dialog", "x1", None, QtGui.QApplication.UnicodeUTF8))
         self.x0_5.setText(QtGui.QApplication.translate("Dialog", "x0.5", None, QtGui.QApplication.UnicodeUTF8))
+        self.time_label.setText(QtGui.QApplication.translate("Dialog", "t, s", None, QtGui.QApplication.UnicodeUTF8))
+        self.t.setText(QtGui.QApplication.translate("Dialog", "0", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

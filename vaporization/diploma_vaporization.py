@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\khony\AppData\Local\Programs\Python\OOP_diploma\project\diploma_vaporization.ui'
+# Form implementation generated from reading ui file 'C:\Users\khony\AppData\Local\Programs\Python\OOP_diploma\project\vaporization\diploma_vaporization.ui'
 #
-# Created: Sun Jan 03 13:58:29 2021
+# Created: Sat Jan 09 13:51:45 2021
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -112,7 +112,8 @@ class Ui_Form(object):
         self.tube_v3_chamber.setText("")
         self.tube_v3_chamber.setObjectName("tube_v3_chamber")
         self.Enable = QtGui.QPushButton(Form)
-        self.Enable.setGeometry(QtCore.QRect(890, 10, 251, 81))
+        self.Enable.setEnabled(False)
+        self.Enable.setGeometry(QtCore.QRect(890, 0, 251, 81))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(14)
@@ -349,6 +350,7 @@ class Ui_Form(object):
         self.x0_5.setAlignment(QtCore.Qt.AlignCenter)
         self.x0_5.setObjectName("x0_5")
         self.overflow = QtGui.QPushButton(Form)
+        self.overflow.setEnabled(False)
         self.overflow.setGeometry(QtCore.QRect(780, 10, 51, 41))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
@@ -386,6 +388,16 @@ class Ui_Form(object):
         self.label.setPixmap(QtGui.QPixmap("vaporization.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
+        self.calculatingFilm = QtGui.QPushButton(Form)
+        self.calculatingFilm.setEnabled(False)
+        self.calculatingFilm.setGeometry(QtCore.QRect(890, 160, 191, 51))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(14)
+        font.setWeight(75)
+        font.setBold(True)
+        self.calculatingFilm.setFont(font)
+        self.calculatingFilm.setObjectName("calculatingFilm")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -417,7 +429,15 @@ class Ui_Form(object):
         self.overflow.setText(QtGui.QApplication.translate("Form", "Air", None, QtGui.QApplication.UnicodeUTF8))
         self.status.setText(QtGui.QApplication.translate("Form", "Power off", None, QtGui.QApplication.UnicodeUTF8))
         self.openChamber.setText(QtGui.QApplication.translate("Form", "Open chamber", None, QtGui.QApplication.UnicodeUTF8))
+        self.calculatingFilm.setText(QtGui.QApplication.translate("Form", "Calculating film", None, QtGui.QApplication.UnicodeUTF8))
 
 
-
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    Form = QtGui.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
 

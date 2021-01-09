@@ -33,7 +33,7 @@
    </property>
    <item>
     <property name="text">
-     <string>Cr</string>
+     <string>Cu</string>
     </property>
    </item>
    <item>
@@ -110,7 +110,7 @@
     <double>20.000000000000000</double>
    </property>
    <property name="singleStep">
-    <double>0.010000000000000</double>
+    <double>0.100000000000000</double>
    </property>
   </widget>
   <widget class="QDoubleSpinBox" name="weight">
@@ -182,7 +182,7 @@
     <double>10.000000000000000</double>
    </property>
    <property name="singleStep">
-    <double>0.010000000000000</double>
+    <double>0.100000000000000</double>
    </property>
   </widget>
   <widget class="QLabel" name="r_label">

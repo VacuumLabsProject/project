@@ -2,7 +2,8 @@ import random
 import sys
 
 from PySide import QtGui, QtCore
-
+import vaporization_calculation
+import edit_while_chamber_is_open
 import vacuum_system
 from diploma_vaporization import Ui_Form
 
@@ -14,17 +15,6 @@ tm_but = "off"
 enable = "off"
 overflow = "off"
 ready = "red"
-
-
-def open_chamber_but():
-    import edit_while_chamber_is_open
-    import vaporization_calculation
-    info = edit_while_chamber_is_open.New_Window()
-    h = info.distance.value()
-    r = info.radius.value()
-    material = info.comboBox.currentText()
-    mass = info.weight.value()
-    vaporization_calculation.Vaporization_Window(h=h, r=r, material=material, mass=mass)
 
 
 class MainWindow(QtGui.QMainWindow, Ui_Form):
@@ -58,12 +48,33 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.status.setText("Power on")
             self.fl_pump.setEnabled(True)
             self.overflow.setEnabled(True)
+            self.openChamber.setEnabled(False)
+            self.spinbox_V.setEnabled(False)
+            self.spinbox_l_fl.setEnabled(False)
+            self.spinbox_d_fl.setEnabled(False)
+            self.spinbox_Qin1.setEnabled(False)
+            self.spinbox_S1.setEnabled(False)
+            self.spinbox_l_tm.setEnabled(False)
+            self.spinbox_d_tm.setEnabled(False)
+            self.spinbox_Qin2.setEnabled(False)
+            self.spinbox_S2.setEnabled(False)
 
         elif enable == "on":
             enable = "off"
             self.status.setText("Power off")
             self.fl_pump.setEnabled(False)
             self.overflow.setEnabled(False)
+            if int(self.p_cur) == self.p0:
+                self.openChamber.setEnabled(True)
+                self.spinbox_V.setEnabled(True)
+                self.spinbox_l_fl.setEnabled(True)
+                self.spinbox_d_fl.setEnabled(True)
+                self.spinbox_Qin1.setEnabled(True)
+                self.spinbox_S1.setEnabled(True)
+                self.spinbox_l_tm.setEnabled(True)
+                self.spinbox_d_tm.setEnabled(True)
+                self.spinbox_Qin2.setEnabled(True)
+                self.spinbox_S2.setEnabled(True)
 
     def Enable_fl_pump(self):
         global fl_but
@@ -244,6 +255,8 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         #print self.P
         self.pressure_value.setText(str(round(self.p_cur, 5)))
         self.time_label2.setText(str(self.time02))
+        if float(self.p_cur) < 1:
+            self.calculatingFilm.setEnabled(True)
 
     # running time-slider
     def chose_time(self):
@@ -292,6 +305,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
 
     def updateOverflow(self):
         self.time03 += 1
+        self.calculatingFilm.setEnabled(False)
         self.p_cur = self.vac_system.pump.overflow(self.time03, self.p_cur)
         self.P.append(self.p_cur)
 
@@ -301,6 +315,20 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.time02 = 0
             self.time03 = 0
             self.TimerOverflow.stop()
+
+    def open_chamber_but(self):
+        info = edit_while_chamber_is_open.New_Window()
+        self.h = info.distance.value()
+        self.r = info.radius.value()
+        self.material = info.comboBox.currentText()
+        self.mass = info.weight.value()
+        self.Enable.setEnabled(True)
+        self.overflow.setEnabled(True)
+
+    def calculating_film_but(self):
+        vaporization_calculation.Vaporization_Window(h=self.h, r=self.r,
+                                                     material=self.material,
+                                                     mass=self.mass)
 
 
 if __name__ == "__main__":
@@ -319,7 +347,8 @@ if __name__ == "__main__":
     ui.tm_pump.clicked.connect(ui.Enable_tm_pump)
     ui.timeSlider.valueChanged.connect(ui.chose_time)
     ui.overflow.clicked.connect(ui.overflow_but)
-    ui.openChamber.clicked.connect(open_chamber_but)
+    ui.openChamber.clicked.connect(ui.open_chamber_but)
+    ui.calculatingFilm.clicked.connect(ui.calculating_film_but)
 
     # run app
     sys.exit(app.exec_())

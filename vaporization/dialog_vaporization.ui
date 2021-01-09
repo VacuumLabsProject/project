@@ -332,7 +332,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>120</y>
+     <y>160</y>
      <width>71</width>
      <height>31</height>
     </rect>
@@ -356,7 +356,7 @@
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>120</y>
+     <y>160</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -380,7 +380,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>160</y>
+     <y>200</y>
      <width>71</width>
      <height>31</height>
     </rect>
@@ -404,7 +404,7 @@
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>160</y>
+     <y>200</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -428,7 +428,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>200</y>
+     <y>240</y>
      <width>71</width>
      <height>31</height>
     </rect>
@@ -452,7 +452,7 @@
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>200</y>
+     <y>240</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -615,6 +615,54 @@
    </property>
    <property name="text">
     <string>x0.5</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="time_label">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>120</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>t, s</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="t">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>120</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>0</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

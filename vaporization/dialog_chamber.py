@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\khony\AppData\Local\Programs\Python\OOP_diploma\project\vaporization\dialog_chamber.ui'
 #
-# Created: Thu Jan 07 17:53:47 2021
+# Created: Sat Jan 09 13:38:16 2021
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -47,7 +47,7 @@ class Ui_Dialog(object):
         font.setPointSize(10)
         self.distance.setFont(font)
         self.distance.setMaximum(20.0)
-        self.distance.setSingleStep(0.01)
+        self.distance.setSingleStep(0.1)
         self.distance.setObjectName("distance")
         self.weight = QtGui.QDoubleSpinBox(Dialog)
         self.weight.setGeometry(QtCore.QRect(10, 100, 81, 31))
@@ -75,7 +75,7 @@ class Ui_Dialog(object):
         font.setPointSize(10)
         self.radius.setFont(font)
         self.radius.setMaximum(10.0)
-        self.radius.setSingleStep(0.01)
+        self.radius.setSingleStep(0.1)
         self.radius.setObjectName("radius")
         self.r_label = QtGui.QLabel(Dialog)
         self.r_label.setGeometry(QtCore.QRect(100, 70, 51, 31))
@@ -92,7 +92,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
-        self.comboBox.setItemText(0, QtGui.QApplication.translate("Dialog", "Cr", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(0, QtGui.QApplication.translate("Dialog", "Cu", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.setItemText(1, QtGui.QApplication.translate("Dialog", "Al", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.setItemText(2, QtGui.QApplication.translate("Dialog", "Ti", None, QtGui.QApplication.UnicodeUTF8))
         self.ok_button.setText(QtGui.QApplication.translate("Dialog", "OK", None, QtGui.QApplication.UnicodeUTF8))
