@@ -49,12 +49,31 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.status.setText("Power on")
             self.fl_pump.setEnabled(True)
             self.overflow.setEnabled(True)
+            self.spinbox_V.setEnabled(False)
+            self.spinbox_l_fl.setEnabled(False)
+            self.spinbox_d_fl.setEnabled(False)
+            self.spinbox_Qin1.setEnabled(False)
+            self.spinbox_S1.setEnabled(False)
+            self.spinbox_l_tm.setEnabled(False)
+            self.spinbox_d_tm.setEnabled(False)
+            self.spinbox_Qin2.setEnabled(False)
+            self.spinbox_S2.setEnabled(False)
 
         elif enable == "on":
             enable = "off"
             self.status.setText("Power off")
             self.fl_pump.setEnabled(False)
             self.overflow.setEnabled(False)
+            if int(self.p_cur) == self.p0:
+                self.spinbox_V.setEnabled(True)
+                self.spinbox_l_fl.setEnabled(True)
+                self.spinbox_d_fl.setEnabled(True)
+                self.spinbox_Qin1.setEnabled(True)
+                self.spinbox_S1.setEnabled(True)
+                self.spinbox_l_tm.setEnabled(True)
+                self.spinbox_d_tm.setEnabled(True)
+                self.spinbox_Qin2.setEnabled(True)
+                self.spinbox_S2.setEnabled(True)
 
     def Enable_fl_pump(self):
         global fl_but
