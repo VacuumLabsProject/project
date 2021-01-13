@@ -83,12 +83,14 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.status.setText("Enabled forevacuum pump")
             self.valve3.setEnabled(True)
             self.valve2.setEnabled(True)
+            self.overflow.setEnabled(False)
             self.Timer_on()
         else:
             fl_but = "off"
             self.status.setText("Disabled forevacuum pump")
             self.valve3.setEnabled(False)
             self.valve2.setEnabled(False)
+            self.overflow.setEnabled(True)
             self.Timer_on()
 
     def Enable_tm_pump(self):
@@ -106,12 +108,10 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         global v1_but
         if v1_but == "off":
             v1_but = "on"
-            self.overflow.setEnabled(False)
             self.Timer_on()
         else:
             v1_but = "off"
             self.status.setText("Enabled high vacuum pump")
-            self.overflow.setEnabled(True)
             self.Timer_on()
 
     def Enable_valve_2(self):
@@ -131,12 +131,10 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         global v3_but
         if v3_but == "off":
             v3_but = "on"
-            self.overflow.setEnabled(False)
             self.valve2.setEnabled(False)
             self.Timer_on()
         else:
             v3_but = "off"
-            self.overflow.setEnabled(True)
             self.valve2.setEnabled(True)
             self.Timer_on()
 
@@ -177,7 +175,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
     def count_time(self):
         global ready
         self.t -= 1
-        # print self.t
+        # print(self.t)
         if self.t == 0:
             self.readiness.setStyleSheet("background-color: green;")
             ready = "green"
@@ -188,7 +186,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
     def count_time2(self):
         global ready
         self.t -= 1
-        # print self.t
+        # print(self.t)
         if self.t == 0:
             self.readiness.setStyleSheet("background-color: red;")
             ready = "red"
@@ -233,7 +231,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
                                                      d2=self.spinbox_d_tm.value(),
                                                      l2=self.spinbox_d_tm.value())
         self.P.append(self.p_cur)
-        # print self.P
+        # print(self.P)
         self.pressure_value.setText(str(round(self.p_cur, 2)))
         self.time_label1.setText(str(self.time))
 
@@ -252,7 +250,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
                                                       l2=self.spinbox_d_tm.value()
                                                       )
         self.P.append(self.p_cur)
-        #print self.P
+        #print(self.P)
         self.pressure_value.setText(str(round(self.p_cur, 5)))
         self.time_label2.setText(str(self.time02))
         if float(self.p_cur) < 1:

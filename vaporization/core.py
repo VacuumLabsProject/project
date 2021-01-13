@@ -54,7 +54,7 @@ class Pump:
             return p
 
         else:
-            print "something does not connected"
+            print("something does not connected")
 
     def overflow(self, time, pcur):
         p = calculating_pressure.calculate_overflow(time, pcur)
