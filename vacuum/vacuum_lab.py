@@ -82,12 +82,14 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.status.setText("Enabled forevacuum pump")
             self.valve3.setEnabled(True)
             self.valve2.setEnabled(True)
+            self.overflow.setEnabled(False)
             self.Timer_on()
         else:
             fl_but = "off"
             self.status.setText("Disabled forevacuum pump")
             self.valve3.setEnabled(False)
             self.valve2.setEnabled(False)
+            self.overflow.setEnabled(True)
             self.Timer_on()
 
     def Enable_tm_pump(self):
@@ -105,12 +107,10 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         global v1_but
         if v1_but == "off":
             v1_but = "on"
-            self.overflow.setEnabled(False)
             self.Timer_on()
         else:
             v1_but = "off"
             self.status.setText("Enabled high vacuum pump")
-            self.overflow.setEnabled(True)
             self.Timer_on()
 
     def Enable_valve_2(self):
@@ -130,12 +130,10 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         global v3_but
         if v3_but == "off":
             v3_but = "on"
-            self.overflow.setEnabled(False)
             self.valve2.setEnabled(False)
             self.Timer_on()
         else:
             v3_but = "off"
-            self.overflow.setEnabled(True)
             self.valve2.setEnabled(True)
             self.Timer_on()
 
