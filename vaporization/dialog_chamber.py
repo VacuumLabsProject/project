@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\khony\AppData\Local\Programs\Python\OOP_diploma\project\vaporization\dialog_chamber.ui'
 #
-# Created: Sat Jan 09 13:38:16 2021
+# Created: Sat Jan 16 21:21:08 2021
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -94,7 +94,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.setItemText(0, QtGui.QApplication.translate("Dialog", "Cu", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.setItemText(1, QtGui.QApplication.translate("Dialog", "Al", None, QtGui.QApplication.UnicodeUTF8))
-        self.comboBox.setItemText(2, QtGui.QApplication.translate("Dialog", "Ti", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(2, QtGui.QApplication.translate("Dialog", "Cr", None, QtGui.QApplication.UnicodeUTF8))
         self.ok_button.setText(QtGui.QApplication.translate("Dialog", "OK", None, QtGui.QApplication.UnicodeUTF8))
         self.h_label.setText(QtGui.QApplication.translate("Dialog", "h, cm", None, QtGui.QApplication.UnicodeUTF8))
         self.m_label.setText(QtGui.QApplication.translate("Dialog", "m, g", None, QtGui.QApplication.UnicodeUTF8))

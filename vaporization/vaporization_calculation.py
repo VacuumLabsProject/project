@@ -3,6 +3,7 @@ from dialog_vaporization import Ui_Dialog
 from numpy import pi, sqrt, log10
 
 damper_but = "off"
+heat_but = "off"
 
 
 def calculate_d0(m, ro, h):
@@ -14,12 +15,11 @@ def calculate_dr(m, ro, h, r):
     dr = (m / (pi * ro * h ** 2)) * (1 + (r / h) ** 2) ** (-2)
     return dr
 
-"""
+
 def calculate_p0(A, B, Tvap):
     lgp0 = A - B / Tvap
     p0 = (10 ** lgp0) * 133
     return p0
-"""
 
 
 def calculate_Jm(B, C, T):
@@ -54,12 +54,13 @@ class Vaporization_Window(QtGui.QDialog, Ui_Dialog):
             B = 15940
             C = 8.27
             M = 0.0269815386
-        elif material == "Ti":
-            ro = 4540
-            A = 9.5
-            B = 23230
-            C = 9.11
-            M = 0.047867
+        elif material == "Cr":
+            ro = 7190
+            A = 9.94
+            B = 20000
+            C = 9.56
+            M = 0.0519961
+
         self.h = h / 100 # m
         self.m = mass / 1000 # kg
         self.ro = ro # kg/m3
@@ -70,6 +71,7 @@ class Vaporization_Window(QtGui.QDialog, Ui_Dialog):
         self.M = M # kg/mole
 
         self.jm = 0
+        self.T = 0
 
         self.S = 4 * 10 ** -4 # spiral surface area
         self.eps = 0.8
@@ -88,31 +90,60 @@ class Vaporization_Window(QtGui.QDialog, Ui_Dialog):
             self.voltage_value)
         self.damper.clicked.connect(self.damper_change)
         self.timeSlider.valueChanged.connect(self.Timer_sputtering)
+        self.heat.clicked.connect(self.heat_clicked)
 
         self.exec_()
+
+    def heat_clicked(self):
+        global heat_but
+        heat_but = "on"
+        self.p_limitation()
+
+    def p_limitation(self):
+        global heat_but
+        if int(self.T) == 0:
+            self.damper.setEnabled(False)
+            self.status.setText("Set the temperature of vaporization")
+        else:
+            self.P0 = calculate_p0(self.A, self.B, self.T)
+            if self.P0 < 133 and heat_but == "on":
+                self.damper.setEnabled(True)
+                self.status.setText("Ready for work")
+            elif self.P0 >= 133:
+                self.damper.setEnabled(False)
+                self.status.setText("Saturated steam pressure too high. "
+                                    "Decrease the temperature.")
+            elif heat_but != "on":
+                self.status.setText("Heat the substrate")
 
     def current_value(self):
         self.current.setText(str(self.current_dial.value()))
         Q = self.current_dial.value() * self.voltage_dial.value()
-        T = (Q / (self.eps * self.S_B * self.S)) ** (1. / 4)
-        self.temperature.setText(str(int(T)))
-        self.Timer_sputtering()
+        self.T = (Q / (self.eps * self.S_B * self.S)) ** (1. / 4)
+        self.temperature.setText(str(int(self.T)))
+        self.p_limitation()
 
     def voltage_value(self):
         self.voltage.setText(str(self.voltage_dial.value()))
         Q = self.current_dial.value() * self.voltage_dial.value()
         self.T = (Q / (self.eps * self.S_B * self.S)) ** (1. / 4)
         self.temperature.setText(str(int(self.T)))
-        self.Timer_sputtering()
+        self.p_limitation()
 
     def damper_change(self):
         global damper_but
         if damper_but == "off":
             damper_but = "on"
+            self.current_dial.setEnabled(False)
+            self.voltage_dial.setEnabled(False)
+            self.heat.setEnabled(False)
             self.damper_state.setStyleSheet("background-color: green;")
             self.Timer_sputtering()
         else:
             damper_but = "off"
+            self.current_dial.setEnabled(True)
+            self.voltage_dial.setEnabled(True)
+            self.heat.setEnabled(True)
             self.damper_state.setStyleSheet("background-color: red;")
 
     def Timer_sputtering(self):
@@ -121,8 +152,8 @@ class Vaporization_Window(QtGui.QDialog, Ui_Dialog):
         if self.S * self.jm * self.time >= self.m:
             pass
         elif damper_but == "on":
+            self.status.setText("in progress...")
             self.TimerSputtering.start()
-            # P0 = calculate_p0(self.A, self.B, T)
             self.jm = calculate_Jm(self.B, self.C, self.T)
             self.TimerSputtering.setInterval(
                 self.time_interval * self.timeSlider.value())
@@ -135,6 +166,7 @@ class Vaporization_Window(QtGui.QDialog, Ui_Dialog):
             self.dr.setText(str(round(self.dr_max * 1000000000, 0)))
             self.K.setText(str(round(self.K_max, 2)))
             self.t.setText(str(self.time))
+            self.status.setText("Done")
             self.TimerSputtering.stop()
         else:
             v0 = self.S * self.jm / (pi * self.ro * self.h ** 2)
