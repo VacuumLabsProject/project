@@ -138,7 +138,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         global overflow
         if overflow == "on":
             overflow = "off"
-
+            self.p0 = self.p_cur
             self.fl_pump.setEnabled(True)
             self.Timer_common_func()
         else:
@@ -259,11 +259,13 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.time03 += 1
         self.p_cur = self.vac_system.pump.overflow(self.time03, self.p_cur)
         self.P.append(self.p_cur)
-        self.pressure_value.setText(str(round(self.p_cur, 0)))
-        if int(self.p_cur) == self.p0:
+        self.p02 = 133
+        if self.time != 0:
             self.time = 0
             self.time02 = 0
             self.time03 = 0
+        self.pressure_value.setText(str(round(self.p_cur, 0)))
+        if int(self.p_cur) == self.p0:
             self.Timer_common.stop()
 
     def open_chamber_but(self):
