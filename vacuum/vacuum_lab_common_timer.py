@@ -1,4 +1,4 @@
-from PySide import QtGui, QtCore
+from PyQt5 import QtWidgets, QtCore
 from diploma import Ui_Form
 import sys
 import vacuum_system
@@ -11,7 +11,7 @@ overflow = "off"
 ready = "red"
 
 
-class MainWindow(QtGui.QMainWindow, Ui_Form):
+class MainWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.P = [100000]
@@ -170,7 +170,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.Timer_common.timeout.connect(self.count_time)
 
         elif tm_but == "on" and self.t != 0 or tm_but == "off" and self.t != 0:
-            print self.t
+            print(self.t)
             self.Timer_common.setInterval(
                 self.time_interval * self.timeSlider.value())
             self.Timer_common.timeout.connect(self.count_time)
@@ -227,9 +227,9 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         # print self.P
         self.pressure_value.setText(str(round(self.p_cur, 2)))
         if self.p_cur > 133:
-            self.progressBar.setValue(self.p_cur)
+            self.progressBar.setValue(int(self.p_cur))
         else:
-            self.progressBar_2.setValue(self.p_cur)
+            self.progressBar_2.setValue(int(self.p_cur))
         self.time_label1.setText(str(self.time))
 
     def turbomolecular(self):
@@ -249,7 +249,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
         self.P.append(self.p_cur)
         #print self.P
         self.pressure_value.setText(str(round(self.p_cur, 5)))
-        self.progressBar_2.setValue(self.p_cur)
+        self.progressBar_2.setValue(int(self.p_cur))
         self.time_label2.setText(str(self.time02))
 
     def updateOverflow(self):
@@ -270,7 +270,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
 
 if __name__ == "__main__":
     # create app
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     # create form and init UI
     ui = MainWindow()

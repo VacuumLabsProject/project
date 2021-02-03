@@ -1,8 +1,8 @@
-from PySide import QtGui
+from PyQt5 import QtWidgets
 from dialog_chamber import Ui_Dialog
 
 
-class New_Window(QtGui.QDialog, Ui_Dialog):
+class New_Window(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self):
         super(New_Window, self).__init__()
 

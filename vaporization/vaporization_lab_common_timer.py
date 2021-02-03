@@ -1,7 +1,7 @@
 import random
 import sys
 
-from PySide import QtGui, QtCore
+from PyQt5 import QtWidgets, QtCore
 import vaporization_calculation
 import edit_while_chamber_is_open
 import vacuum_system
@@ -14,7 +14,7 @@ overflow = "off"
 ready = "red"
 
 
-class MainWindow(QtGui.QMainWindow, Ui_Form):
+class MainWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.P = [100000]
@@ -176,7 +176,6 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
             self.Timer_common.timeout.connect(self.count_time)
 
         elif tm_but == "on" and self.t != 0 or tm_but == "off" and self.t != 0:
-            print self.t
             self.Timer_common.setInterval(
                 self.time_interval * self.timeSlider.value())
             self.Timer_common.timeout.connect(self.count_time)
@@ -285,7 +284,7 @@ class MainWindow(QtGui.QMainWindow, Ui_Form):
 
 if __name__ == "__main__":
     # create app
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     # create form and init UI
     ui = MainWindow()

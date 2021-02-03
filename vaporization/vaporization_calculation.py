@@ -1,4 +1,4 @@
-from PySide import QtGui, QtCore
+from PyQt5 import QtWidgets, QtCore
 from dialog_vaporization import Ui_Dialog
 from numpy import pi, sqrt, log10
 
@@ -27,7 +27,7 @@ def calculate_Jm(B, C, T):
     return Jm
 
 
-class Vaporization_Window(QtGui.QDialog, Ui_Dialog):
+class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self, h, r, material, mass):
         super(Vaporization_Window, self).__init__()
 
