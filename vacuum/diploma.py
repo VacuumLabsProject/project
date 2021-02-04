@@ -423,14 +423,3 @@ class Ui_Form(object):
         self.x0_5.setText(_translate("Form", "x0.5"))
         self.overflow.setText(_translate("Form", "Air"))
         self.status.setText(_translate("Form", "Power off"))
-
-
-if __name__ == "__main__":
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
