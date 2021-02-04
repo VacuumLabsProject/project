@@ -16,23 +16,24 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(1165, 699)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal,
+                       QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
         Form.setStyleSheet("QWidget {\n"
-"    background-color: rgb(200, 255, 255);\n"
-"}\n"
-"\n"
-".QDial, .QPushButton {\n"
-"    background-color: rgb(204, 204, 204);\n"
-"}\n"
-"\n"
-".QLabel {\n"
-"    background-color: rgb(226, 226, 226)\n"
-"}\n"
-"\n"
-".QDoubleSpinBox, .QLineEdit {\n"
-"    background-color: white\n"
-"}")
+                           "    background-color: rgb(200, 255, 255);\n"
+                           "}\n"
+                           "\n"
+                           ".QDial, .QPushButton {\n"
+                           "    background-color: rgb(204, 204, 204);\n"
+                           "}\n"
+                           "\n"
+                           ".QLabel {\n"
+                           "    background-color: rgb(226, 226, 226)\n"
+                           "}\n"
+                           "\n"
+                           ".QDoubleSpinBox, .QLineEdit {\n"
+                           "    background-color: white\n"
+                           "}")
         self.vacuum_chamber = QtWidgets.QLabel(Form)
         self.vacuum_chamber.setGeometry(QtCore.QRect(30, 20, 681, 181))
         self.vacuum_chamber.setStyleSheet("")
@@ -149,7 +150,8 @@ class Ui_Form(object):
         font.setBold(True)
         font.setWeight(75)
         self.time_label1.setFont(font)
-        self.time_label1.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.time_label1.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.time_label1.setObjectName("time_label1")
         self.spinbox_l_tm = QtWidgets.QDoubleSpinBox(Form)
         self.spinbox_l_tm.setGeometry(QtCore.QRect(180, 440, 62, 22))
@@ -243,7 +245,8 @@ class Ui_Form(object):
         self.timeSlider.setGeometry(QtCore.QRect(890, 600, 241, 31))
         self.timeSlider.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.timeSlider.setMouseTracking(False)
-        self.timeSlider.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
+        self.timeSlider.setLocale(QtCore.QLocale(QtCore.QLocale.English,
+                                                 QtCore.QLocale.UnitedStates))
         self.timeSlider.setMinimum(1)
         self.timeSlider.setMaximum(200)
         self.timeSlider.setSingleStep(1)
@@ -433,13 +436,3 @@ class Ui_Form(object):
         self.status.setText(_translate("Form", "Power off"))
         self.openChamber.setText(_translate("Form", "Open chamber"))
         self.calculatingFilm.setText(_translate("Form", "Calculating film"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
