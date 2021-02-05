@@ -16,20 +16,19 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(1165, 696)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal,
-                       QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
         Form.setStyleSheet("QWidget {\n"
-                           "    background-color: rgb(200, 255, 255);\n"
-                           "}\n"
-                           "\n"
-                           ".QLabel, .QDial, .QPushButton {\n"
-                           "    background-color: rgb(204, 204, 204);\n"
-                           "}\n"
-                           "\n"
-                           ".QDoubleSpinBox, .QLineEdit {\n"
-                           "    background-color: white\n"
-                           "}")
+"    background-color: rgb(200, 255, 255);\n"
+"}\n"
+"\n"
+".QLabel, .QDial, .QPushButton {\n"
+"    background-color: rgb(204, 204, 204);\n"
+"}\n"
+"\n"
+".QDoubleSpinBox, .QLineEdit {\n"
+"    background-color: white\n"
+"}")
         self.vacuum_chamber = QtWidgets.QLabel(Form)
         self.vacuum_chamber.setGeometry(QtCore.QRect(40, 40, 681, 161))
         self.vacuum_chamber.setStyleSheet("")
@@ -238,8 +237,7 @@ class Ui_Form(object):
         self.timeSlider.setGeometry(QtCore.QRect(900, 380, 241, 31))
         self.timeSlider.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.timeSlider.setMouseTracking(False)
-        self.timeSlider.setLocale(QtCore.QLocale(QtCore.QLocale.English,
-                                                 QtCore.QLocale.UnitedStates))
+        self.timeSlider.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.timeSlider.setMinimum(1)
         self.timeSlider.setMaximum(200)
         self.timeSlider.setSingleStep(1)
@@ -389,9 +387,16 @@ class Ui_Form(object):
         self.progressBar_2.setTextVisible(False)
         self.progressBar_2.setFormat("")
         self.progressBar_2.setObjectName("progressBar_2")
-        self.graphicsView = QtWidgets.QGraphicsView(Form)
-        self.graphicsView.setGeometry(QtCore.QRect(820, 470, 256, 192))
-        self.graphicsView.setObjectName("graphicsView")
+        self.show_graph = QtWidgets.QPushButton(Form)
+        self.show_graph.setEnabled(True)
+        self.show_graph.setGeometry(QtCore.QRect(300, 330, 141, 41))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.show_graph.setFont(font)
+        self.show_graph.setObjectName("show_graph")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -423,3 +428,14 @@ class Ui_Form(object):
         self.x0_5.setText(_translate("Form", "x0.5"))
         self.overflow.setText(_translate("Form", "Air"))
         self.status.setText(_translate("Form", "Power off"))
+        self.show_graph.setText(_translate("Form", "Show graph"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

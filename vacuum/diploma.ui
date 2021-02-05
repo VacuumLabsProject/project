@@ -1044,14 +1044,28 @@
     <string/>
    </property>
   </widget>
-  <widget class="QGraphicsView" name="graphicsView">
+  <widget class="QPushButton" name="show_graph">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>820</x>
-     <y>470</y>
-     <width>256</width>
-     <height>192</height>
+     <x>300</x>
+     <y>330</y>
+     <width>141</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Show graph</string>
    </property>
   </widget>
  </widget>

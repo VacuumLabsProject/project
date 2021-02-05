@@ -3,6 +3,7 @@ from diploma import Ui_Form
 import sys
 import vacuum_system
 import random
+import show_graph_button
 
 fl_but = "off"
 tm_but = "off"
@@ -15,6 +16,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.P = [100000]
+        self.time_massive = [0]
         self.t = 0
         self.time = 0
         self.time02 = 0
@@ -156,6 +158,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             self.valve2.setEnabled(False)
             self.t = random.randint(720, 900)
             self.status.setText("Running-up high vacuum pump")
+            self.p02 = self.p_cur
             self.Timer_common.setInterval(
                 self.time_interval * self.timeSlider.value())
             self.Timer_common.timeout.connect(self.count_time)
@@ -224,6 +227,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
                                                      d2=self.spinbox_d_tm.value(),
                                                      l2=self.spinbox_d_tm.value())
         self.P.append(self.p_cur)
+        self.time_massive.append(self.time)
         # print self.P
         self.pressure_value.setText(str(round(self.p_cur, 2)))
         if self.p_cur > 133:
@@ -247,6 +251,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
                                                       l2=self.spinbox_d_tm.value()
                                                       )
         self.P.append(self.p_cur)
+        self.time_massive.append(self.time + self.time02)
         #print self.P
         self.pressure_value.setText(str(round(self.p_cur, 5)))
         self.progressBar_2.setValue(int(self.p_cur))
@@ -255,17 +260,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
     def updateOverflow(self):
         self.time03 += 1
         self.p_cur = self.vac_system.pump.overflow(self.time03, self.p_cur)
-        if self.time != 0:
-            self.time = 0
-            self.time02 = 0
-            self.time03 = 0
         self.P.append(self.p_cur)
+        self.time_massive.append(self.time + self.time02 + self.time03)
         self.p02 = 133
         self.progressBar_2.setValue(133)
         self.progressBar.setValue(int(self.p_cur))
         self.pressure_value.setText(str(round(self.p_cur, 0)))
         if int(self.p_cur) == self.p0:
             self.Timer_common.stop()
+            self.time = 0
+            self.time02 = 0
+            self.time03 = 0
+            # self.time_massive.clear()
+            # self.P.clear()
+
+    def show_plot_but(self):
+        show_graph_button.show_plot(self.time_massive, self.P)
 
 
 if __name__ == "__main__":
@@ -284,6 +294,7 @@ if __name__ == "__main__":
     ui.tm_pump.clicked.connect(ui.Enable_tm_pump)
     ui.timeSlider.valueChanged.connect(ui.Timer_common_func)
     ui.overflow.clicked.connect(ui.Enable_overflow)
+    ui.show_graph.clicked.connect(ui.show_plot_but)
 
     # run app
     sys.exit(app.exec_())
