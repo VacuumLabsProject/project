@@ -298,8 +298,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             M2 = self.S[4]
             d1 = self.S[5]
             d2 = self.S[6]
+            Ecv = self.S[7]
             self.S = self.S[0]
-            self.h = calculating_things.calculating_h(T, Z1, M1, Z2, M2, d1, d2, self.material)
+            self.h = calculating_things.calculating_h(T, M1, M2, d1, d2, Ecv)
             self.status_2.setText("Recommended h = {} cm".format(self.h))
             self.Enable.setEnabled(True)
             self.overflow.setEnabled(True)
