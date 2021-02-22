@@ -254,7 +254,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         #print self.P
         self.pressure_value.setText(str(round(self.p_cur, 5)))
         self.time_label2.setText(str(self.time02))
-        if float(self.p_cur) < 1:
+        if float(self.p_cur) < 0.1:
             self.calculatingFilm.setEnabled(True)
 
     def updateOverflow(self):

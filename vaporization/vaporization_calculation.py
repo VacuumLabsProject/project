@@ -174,8 +174,8 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
             self.d0_val = v0 * self.time
             dr_val = vr * self.time
             K_val = dr_val / self.d0_val
-            self.d0.setText(str(round(self.d0_val * 1000000000, 0)))
-            self.dr.setText(str(round(dr_val * 1000000000, 0)))
+            self.d0.setText(str(round(self.d0_val * 1000000000, 1)))
+            self.dr.setText(str(round(dr_val * 1000000000, 1)))
             self.K.setText(str(round(K_val, 2)))
             self.t.setText(str(self.time))
 
