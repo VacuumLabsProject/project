@@ -101,9 +101,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
     def Enable_valve_1(self):
         if self.vac_system.valve1.state == "close":
             self.vac_system.valve1.state = "open"
+            self.tm_pump.setEnabled(False)
             self.Timer_common_func()
         else:
             self.vac_system.valve1.state = "close"
+            self.tm_pump.setEnabled(True)
             self.status.setText("Enabled high vacuum pump")
             self.Timer_common_func()
 
@@ -111,18 +113,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         if self.vac_system.valve2.state == "close" and self.p_cur > 133:
             self.vac_system.valve2.state = "open"
             self.valve3.setEnabled(False)
+            self.fl_pump.setEnabled(False)
             self.Timer_common_func()
 
         elif self.vac_system.valve2.state == "close" and self.p_cur < 133:
             self.vac_system.valve2.state = "open"
             self.valve3.setEnabled(False)
             self.tm_pump.setEnabled(True)
+            self.fl_pump.setEnabled(False)
             self.Timer_common_func()
 
         else:
             self.vac_system.valve2.state = "close"
             self.valve3.setEnabled(True)
             self.tm_pump.setEnabled(False)
+            self.fl_pump.setEnabled(True)
             self.Timer_common_func()
 
     def Enable_valve_3(self):
@@ -130,11 +135,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         if self.vac_system.valve3.state == "close":
             self.vac_system.valve3.state = "open"
             self.valve2.setEnabled(False)
+            self.fl_pump.setEnabled(False)
             self.Timer_common_func()
 
         else:
             self.vac_system.valve3.state = "close"
             self.valve2.setEnabled(True)
+            self.fl_pump.setEnabled(True)
             self.Timer_common_func()
 
     def Enable_overflow(self):
