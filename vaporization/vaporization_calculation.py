@@ -79,7 +79,7 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
 
         self.d0_max = calculate_d0(self.m, self.ro, self.h)
         self.dr_max = calculate_dr(self.m, self.ro, self.h, self.r)
-        self.K_max = self.dr_max / self.d0_max
+        self.K_max = (self.d0_max - self.dr_max) / self.d0_max
 
         self.time = 0
         self.time_interval = 10
@@ -173,7 +173,7 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
             vr = v0 * ((1 + (self.r / self.h) ** 2) ** (-2))
             self.d0_val = v0 * self.time
             dr_val = vr * self.time
-            K_val = dr_val / self.d0_val
+            K_val = (self.d0_val - dr_val) / self.d0_val
             self.d0.setText(str(round(self.d0_val * 1000000000, 1)))
             self.dr.setText(str(round(dr_val * 1000000000, 1)))
             self.K.setText(str(round(K_val, 2)))
