@@ -284,7 +284,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.progressBar.setValue(int(self.p_cur))
         self.pressure_value.setText(str(round(self.p_cur, 0)))
         if int(self.p_cur) == self.p0:
-            self.Timer_common.stop()
+            # self.Timer_common.stop()
             self.current_time = self.current_time + self.time + self.time02 + self.time03
             self.time = 0
             self.time02 = 0

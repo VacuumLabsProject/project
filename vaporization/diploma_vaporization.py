@@ -16,24 +16,23 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(1165, 699)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal,
-                       QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
         Form.setStyleSheet("QWidget {\n"
-                           "    background-color: rgb(200, 255, 255);\n"
-                           "}\n"
-                           "\n"
-                           ".QDial, .QPushButton {\n"
-                           "    background-color: rgb(204, 204, 204);\n"
-                           "}\n"
-                           "\n"
-                           ".QLabel {\n"
-                           "    background-color: rgb(226, 226, 226)\n"
-                           "}\n"
-                           "\n"
-                           ".QDoubleSpinBox, .QLineEdit {\n"
-                           "    background-color: white\n"
-                           "}")
+"    background-color: rgb(200, 255, 255);\n"
+"}\n"
+"\n"
+".QDial, .QPushButton {\n"
+"    background-color: rgb(204, 204, 204);\n"
+"}\n"
+"\n"
+".QLabel {\n"
+"    background-color: rgb(226, 226, 226)\n"
+"}\n"
+"\n"
+".QDoubleSpinBox, .QLineEdit {\n"
+"    background-color: white\n"
+"}")
         self.vacuum_chamber = QtWidgets.QLabel(Form)
         self.vacuum_chamber.setGeometry(QtCore.QRect(30, 20, 681, 181))
         self.vacuum_chamber.setStyleSheet("")
@@ -142,17 +141,6 @@ class Ui_Form(object):
         self.spinbox_d_fl.setSingleStep(0.01)
         self.spinbox_d_fl.setProperty("value", 0.04)
         self.spinbox_d_fl.setObjectName("spinbox_d_fl")
-        self.time_label1 = QtWidgets.QLineEdit(Form)
-        self.time_label1.setGeometry(QtCore.QRect(940, 390, 111, 41))
-        font = QtGui.QFont()
-        font.setFamily("Times New Roman")
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        self.time_label1.setFont(font)
-        self.time_label1.setAlignment(
-            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        self.time_label1.setObjectName("time_label1")
         self.spinbox_l_tm = QtWidgets.QDoubleSpinBox(Form)
         self.spinbox_l_tm.setGeometry(QtCore.QRect(180, 440, 62, 22))
         self.spinbox_l_tm.setMinimum(0.01)
@@ -203,15 +191,6 @@ class Ui_Form(object):
         self.t2.setFont(font)
         self.t2.setAlignment(QtCore.Qt.AlignCenter)
         self.t2.setObjectName("t2")
-        self.time_label2 = QtWidgets.QLineEdit(Form)
-        self.time_label2.setGeometry(QtCore.QRect(940, 440, 111, 41))
-        font = QtGui.QFont()
-        font.setFamily("Times New Roman")
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        self.time_label2.setFont(font)
-        self.time_label2.setObjectName("time_label2")
         self.time_rewind = QtWidgets.QLabel(Form)
         self.time_rewind.setGeometry(QtCore.QRect(890, 540, 91, 41))
         font = QtGui.QFont()
@@ -232,21 +211,11 @@ class Ui_Form(object):
         self.p.setFont(font)
         self.p.setAlignment(QtCore.Qt.AlignCenter)
         self.p.setObjectName("p")
-        self.pressure_value = QtWidgets.QLineEdit(Form)
-        self.pressure_value.setGeometry(QtCore.QRect(940, 490, 111, 41))
-        font = QtGui.QFont()
-        font.setFamily("Times New Roman")
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        self.pressure_value.setFont(font)
-        self.pressure_value.setObjectName("pressure_value")
         self.timeSlider = QtWidgets.QSlider(Form)
         self.timeSlider.setGeometry(QtCore.QRect(890, 600, 241, 31))
         self.timeSlider.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.timeSlider.setMouseTracking(False)
-        self.timeSlider.setLocale(QtCore.QLocale(QtCore.QLocale.English,
-                                                 QtCore.QLocale.UnitedStates))
+        self.timeSlider.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.timeSlider.setMinimum(1)
         self.timeSlider.setMaximum(200)
         self.timeSlider.setSingleStep(1)
@@ -403,6 +372,45 @@ class Ui_Form(object):
         font.setWeight(75)
         self.calculatingFilm.setFont(font)
         self.calculatingFilm.setObjectName("calculatingFilm")
+        self.time_label1 = QtWidgets.QLabel(Form)
+        self.time_label1.setGeometry(QtCore.QRect(940, 390, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.time_label1.setFont(font)
+        self.time_label1.setStyleSheet("background-color: white;")
+        self.time_label1.setFrameShape(QtWidgets.QFrame.Box)
+        self.time_label1.setText("")
+        self.time_label1.setAlignment(QtCore.Qt.AlignCenter)
+        self.time_label1.setObjectName("time_label1")
+        self.time_label2 = QtWidgets.QLabel(Form)
+        self.time_label2.setGeometry(QtCore.QRect(940, 440, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.time_label2.setFont(font)
+        self.time_label2.setStyleSheet("background-color: white;")
+        self.time_label2.setFrameShape(QtWidgets.QFrame.Box)
+        self.time_label2.setText("")
+        self.time_label2.setAlignment(QtCore.Qt.AlignCenter)
+        self.time_label2.setObjectName("time_label2")
+        self.pressure_value = QtWidgets.QLabel(Form)
+        self.pressure_value.setGeometry(QtCore.QRect(940, 490, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pressure_value.setFont(font)
+        self.pressure_value.setStyleSheet("background-color: white;")
+        self.pressure_value.setFrameShape(QtWidgets.QFrame.Box)
+        self.pressure_value.setText("")
+        self.pressure_value.setAlignment(QtCore.Qt.AlignCenter)
+        self.pressure_value.setObjectName("pressure_value")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -436,3 +444,13 @@ class Ui_Form(object):
         self.status.setText(_translate("Form", "Power off"))
         self.openChamber.setText(_translate("Form", "Open chamber"))
         self.calculatingFilm.setText(_translate("Form", "Calculating film"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

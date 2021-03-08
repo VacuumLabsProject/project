@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1165</width>
-    <height>699</height>
+    <height>706</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -332,27 +332,6 @@
     <double>0.040000000000000</double>
    </property>
   </widget>
-  <widget class="QLineEdit" name="time_label1">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>390</y>
-     <width>111</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Times New Roman</family>
-     <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QDoubleSpinBox" name="spinbox_l_tm">
    <property name="geometry">
     <rect>
@@ -509,24 +488,6 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="time_label2">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>440</y>
-     <width>111</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Times New Roman</family>
-     <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-  </widget>
   <widget class="QLabel" name="time_rewind">
    <property name="geometry">
     <rect>
@@ -573,24 +534,6 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="pressure_value">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>490</y>
-     <width>111</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Times New Roman</family>
-     <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
    </property>
   </widget>
   <widget class="QSlider" name="timeSlider">
@@ -1157,6 +1100,96 @@
    </property>
    <property name="text">
     <string>Water</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pressure_value_2">
+   <property name="geometry">
+    <rect>
+     <x>940</x>
+     <y>490</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="time_label2_2">
+   <property name="geometry">
+    <rect>
+     <x>940</x>
+     <y>440</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="time_label1_2">
+   <property name="geometry">
+    <rect>
+     <x>940</x>
+     <y>390</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: white;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>
