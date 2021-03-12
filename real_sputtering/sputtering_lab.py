@@ -170,6 +170,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         # running-up and running-down
         elif tm_but == "on" and self.t == 0 and not self.valve1.isEnabled():
             self.valve2.setEnabled(False)
+            self.tm_pump.setEnabled(False)
             self.t = random.randint(720, 900)
             self.status.setText("Running-up high vacuum pump")
             self.Timer_common.setInterval(
@@ -213,6 +214,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         global ready
         self.t -= 1
         if self.t == 0:
+            self.tm_pump.setEnabled(True)
             if ready == "red":
                 self.readiness.setStyleSheet("background-color: green;")
                 ready = "green"
@@ -267,7 +269,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.time_label2.setText(str(self.time02))
         if float(self.p_cur) < 0.0005:
             self.gas_flow.setEnabled(True)
-        if Q_flow > 0 and 0.01 < self.p_cur < 1 and water == "on":
+        if Q_flow > 0 and self.goal_pressure-0.1 < self.p_cur < self.goal_pressure+0.1 and water == "on":
             self.calculatingFilm.setEnabled(True)
         else:
             self.calculatingFilm.setEnabled(False)
@@ -291,24 +293,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.material = info.target.currentText()
         self.inert_gas = info.gas.currentText()
         self.energy = info.energy.value()
+        self.goal_pressure = info.pressure.value()
         T = 773
 
         self.S = sputtering_coefficient_calculation.calculation(self.material,
                                                                 self.inert_gas,
                                                                 self.energy)
+
         if self.S == "No such pair":
             self.status_2.setText("Unavailable combination of material and gas")
         else:
-            Z1 = self.S[1]
-            M1 = self.S[2]
-            Z2 = self.S[3]
-            M2 = self.S[4]
-            d1 = self.S[5]
-            d2 = self.S[6]
-            Ecv = self.S[7]
+            self.M1 = self.S[1]
+            self.M2 = self.S[2]
+            d1 = self.S[3]
+            d2 = self.S[4]
+            self.Ecv = self.S[5]
             self.S = self.S[0]
-            self.h = calculating_things.calculating_h(T, M1, M2, d1, d2, Ecv)
-            self.status_2.setText("Recommended h = {} cm".format(self.h))
+            self.h_and_L = calculating_things.calculating_h(T, self.M1,
+                                                            self.M2, d1, d2,
+                                                            self.Ecv,
+                                                            self.goal_pressure)
+            self.status_2.setText(
+                "Recommended h = {} cm".format(self.h_and_L[1]))
+            self.Lambda = self.h_and_L[0]
+            self.h = self.h_and_L[1]
+            self.Lk = self.h_and_L[2]
             self.Enable.setEnabled(True)
             self.overflow.setEnabled(True)
             self.gas.setText(self.inert_gas)
@@ -317,7 +326,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         sputtering_calculation.Sputtering_Window(h=self.h,
                                                  r=self.r,
                                                  material=self.material,
-                                                 sputtering_coef=self.S)
+                                                 sputtering_coef=self.S,
+                                                 M2=self.M2,
+                                                 Lambda=self.Lambda,
+                                                 Lk=self.Lk)
 
     def water_button_clicked(self):
         global water

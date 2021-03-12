@@ -35,6 +35,6 @@ def calculation(Target, Gas, Energy):
 
         S1 = q * sn * ((((int(Energy) / Eth) - 1) ** mu) / (lamda + ((int(Energy) / Eth) - 1) ** mu))
 
-        return S1, Z1, M1, Z2, M2, d1, d2, Ecv
+        return S1, M1, M2, d1, d2, Ecv
 
 

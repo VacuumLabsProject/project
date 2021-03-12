@@ -1015,7 +1015,10 @@
     <number>0</number>
    </property>
    <property name="maximum">
-    <number>599</number>
+    <number>50000</number>
+   </property>
+   <property name="singleStep">
+    <number>100</number>
    </property>
   </widget>
   <widget class="QLabel" name="gas">
@@ -1102,7 +1105,7 @@
     <string>Water</string>
    </property>
   </widget>
-  <widget class="QLabel" name="pressure_value_2">
+  <widget class="QLabel" name="pressure_value">
    <property name="geometry">
     <rect>
      <x>940</x>
@@ -1132,7 +1135,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="time_label2_2">
+  <widget class="QLabel" name="time_label2">
    <property name="geometry">
     <rect>
      <x>940</x>
@@ -1162,7 +1165,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="time_label1_2">
+  <widget class="QLabel" name="time_label1">
    <property name="geometry">
     <rect>
      <x>940</x>
