@@ -361,7 +361,7 @@ class Ui_Form(object):
         self.progressBar_2.setFormat("")
         self.progressBar_2.setObjectName("progressBar_2")
         self.show_graph = QtWidgets.QPushButton(Form)
-        self.show_graph.setEnabled(False)
+        self.show_graph.setEnabled(True)
         self.show_graph.setGeometry(QtCore.QRect(300, 330, 141, 41))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
