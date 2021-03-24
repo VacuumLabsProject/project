@@ -374,7 +374,7 @@ class Ui_Form(object):
         self.gas_flow.setEnabled(False)
         self.gas_flow.setGeometry(QtCore.QRect(780, 160, 50, 64))
         self.gas_flow.setMinimum(0)
-        self.gas_flow.setMaximum(50000)
+        self.gas_flow.setMaximum(100000)
         self.gas_flow.setSingleStep(100)
         self.gas_flow.setObjectName("gas_flow")
         self.gas = QtWidgets.QLabel(Form)
