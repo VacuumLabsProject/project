@@ -15,6 +15,9 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(602, 563)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Dialog.setWindowIcon(icon)
         self.current_label = QtWidgets.QLabel(Dialog)
         self.current_label.setGeometry(QtCore.QRect(40, 100, 51, 31))
         font = QtGui.QFont()
@@ -259,13 +262,18 @@ class Ui_Dialog(object):
         self.d0.setFont(font)
         self.d0.setAlignment(QtCore.Qt.AlignCenter)
         self.d0.setObjectName("d0")
+        self.current_dial = QtWidgets.QDial(Dialog)
+        self.current_dial.setGeometry(QtCore.QRect(100, 110, 50, 64))
+        self.current_dial.setMinimum(3)
+        self.current_dial.setMaximum(15)
+        self.current_dial.setObjectName("current_dial")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Sputtering"))
         self.current_label.setText(_translate("Dialog", "I, A"))
         self.damper.setText(_translate("Dialog", "Damper"))
         self.d0_label.setText(_translate("Dialog", "d0, nm"))
