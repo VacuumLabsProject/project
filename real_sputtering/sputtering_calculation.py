@@ -22,36 +22,54 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         elif material == "Ti":
             ro = 4.54
 
-        h = h / 100  # m
-        ro = ro * 1000  # kg/m3
-        r = r / 100  # m
-        M2 = M2 / 1000
-        # дисковый источник
+        self.h = h / 100  # m
+        self.ro = ro * 1000  # kg/m3
+        self.r = r / 100  # m
+        self.M2 = M2 / 1000
+        self.sputtering_coef = sputtering_coef
+        self.Lambda = Lambda
+        self.Lk = Lk
 
-        NA = 6.02 * 10 ** 23
-        q = 1.6 * 10 ** (-19)
+        self.NA = 6.02 * 10 ** 23
+        self.q = 1.6 * 10 ** (-19)
 
-        I = 0.4 # current
-        d = 0.1 # m радиус распылителя
-        area = (pi * d ** 2) / 4 # cm^2
-        j = I / area # A / cm^2
+        self.d = 0.1 # m радиус распылителя
+        self.area = (pi * self.d ** 2) / 4 # m^2
 
-        Jm = (M2 * sputtering_coef * j) / (NA * q)
-        Jrasp_0 = (Jm / 2) * ((2 * (d/h)**2) / (1 + (d/h)**2))
-        Jrasp_r = (Jm / 2) * (1 - ((1 + (r/h)**2 - (d/h)**2) / sqrt((1 - (r/h)**2 + (d/h)**2)**2 + 4 * (r/h)**2)))
-        Jnap_0 = (Jrasp_0 * Lambda) / (Lambda + (sqrt(Lk) - sqrt(h)) ** 2)
-        Jnap_r = (Jrasp_r * Lambda) / (Lambda + (sqrt(Lk) - sqrt(h)) ** 2)
-        self.vnap_0 = Jnap_0 / ro
-        self.vnap_r = Jnap_r / ro
         self.sputtering_coefficient.setText(str(round(sputtering_coef, 2)))
+        I = self.current_dial.value() / 10
+        Jcond_0, Jcond_r = self.calculate_J(I)
+        self.vcond_0 = Jcond_0 / self.ro
+        self.vcond_r = Jcond_r / self.ro
 
+        self.current.setText(str(I))
         self.time = 0
         self.time_interval = 10
 
+        self.current_dial.valueChanged.connect(self.current_change)
         self.voltage.clicked.connect(self.voltage_button)
         self.damper.clicked.connect(self.damper_change)
         self.timeSlider.valueChanged.connect(self.Timer_sputtering)
         self.exec_()
+
+    def calculate_J(self, I):
+        # дисковый источник
+        j_razr = I / self.area  # A / m^2
+        # учитываем вторичную эмиссию, примем её 0.1
+        ji = j_razr / 1.2  # A / m^2
+
+        Jm = (self.M2 * self.sputtering_coef * ji) / (self.NA * self.q)
+        # плотность напыления
+        Jnap_0 = (Jm / 2) * ((2 * (self.d / self.h) ** 2) / (
+                    1 + (self.d / self.h) ** 2))
+        Jnap_r = (Jm / 2) * (1 - (
+                    (1 + (self.r / self.h) ** 2 - (self.d / self.h) ** 2) / sqrt((1 - (
+                        self.r / self.h) ** 2 + (self.d / self.h) ** 2) ** 2 + 4 * (self.r / self.h) ** 2)))
+        # плотность осаждения
+        Jcond_0 = (Jnap_0 * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
+        Jcond_r = (Jnap_r * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
+
+        return Jcond_0, Jcond_r
 
     def voltage_button(self):
         global voltage_but
@@ -64,14 +82,24 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
             self.voltage.setStyleSheet("background-color: red;")
             self.damper.setEnabled(False)
 
+    def current_change(self):
+        I = self.current_dial.value() / 10
+
+        self.current.setText(str(I))
+        Jcond_0, Jcond_r = self.calculate_J(I)
+        self.vcond_0 = Jcond_0 / self.ro
+        self.vcond_r = Jcond_r / self.ro
+
     def damper_change(self):
         global damper_but
         if damper_but == "off":
             damper_but = "on"
+            self.current_dial.setEnabled(False)
             self.damper_state.setStyleSheet("background-color: green;")
             self.Timer_sputtering()
         else:
             damper_but = "off"
+            self.current_dial.setEnabled(True)
             self.damper_state.setStyleSheet("background-color: red;")
             self.Timer_sputtering()
 
@@ -90,8 +118,8 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
     def timeCounter(self):
         self.time += 1
 
-        d0 = self.vnap_0 * self.time * 10**9
-        dr = self.vnap_r * self.time * 10**9
+        d0 = self.vcond_0 * self.time * 10**9
+        dr = self.vcond_r * self.time * 10**9
         K = (d0 - dr) / d0
         self.d0.setText(str(round(d0, 2)))
         self.dr.setText(str(round(dr, 2)))
