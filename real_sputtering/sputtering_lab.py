@@ -180,6 +180,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         elif tm_but == "off" and self.t == 0 and self.valve1.isEnabled():
             self.valve2.setEnabled(False)
             self.valve1.setEnabled(False)
+            self.tm_pump.setEnabled(False)
             self.t = random.randint(720, 900)
             self.status.setText("Running-down high vacuum pump")
             self.Timer_common.setInterval(
