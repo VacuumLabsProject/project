@@ -14,6 +14,10 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
 
         self.show()
 
+        self.d0_start = 0
+        self.dr_start = 0
+        self.time_start = 0
+
         ro = 0
         if material == "Cu":
             ro = 8.92
@@ -33,10 +37,12 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         self.NA = 6.02 * 10 ** 23
         self.q = 1.6 * 10 ** (-19)
 
-        self.d = 0.1 # m радиус распылителя
+        self.d = 0.025 # m радиус распылителя
         self.area = (pi * self.d ** 2) / 4 # m^2
 
+        self.target_diameter.setText(str(round(self.r * 1000)))
         self.sputtering_coefficient.setText(str(round(sputtering_coef, 2)))
+
         I = self.current_dial.value() / 10
         Jcond_0, Jcond_r = self.calculate_J(I)
         self.vcond_0 = Jcond_0 / self.ro
@@ -95,11 +101,17 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         if damper_but == "off":
             damper_but = "on"
             self.current_dial.setEnabled(False)
+            self.voltage.setEnabled(False)
             self.damper_state.setStyleSheet("background-color: green;")
             self.Timer_sputtering()
         else:
             damper_but = "off"
             self.current_dial.setEnabled(True)
+            self.voltage.setEnabled(True)
+            self.d0_start = self.d0_val
+            self.dr_start = self.dr_val
+            self.time_start = self.time
+            self.time = 0
             self.damper_state.setStyleSheet("background-color: red;")
             self.Timer_sputtering()
 
@@ -118,11 +130,11 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
     def timeCounter(self):
         self.time += 1
 
-        d0 = self.vcond_0 * self.time * 10**9
-        dr = self.vcond_r * self.time * 10**9
-        K = (d0 - dr) / d0
-        self.d0.setText(str(round(d0, 2)))
-        self.dr.setText(str(round(dr, 2)))
+        self.d0_val = self.d0_start + self.vcond_0 * self.time * 10 ** 9
+        self.dr_val = self.dr_start + self.vcond_r * self.time * 10 ** 9
+        K = (self.d0_val - self.dr_val) / self.d0_val
+        self.d0.setText(str(round(self.d0_val, 2)))
+        self.dr.setText(str(round(self.dr_val, 2)))
         self.K0.setText(str(round(K, 2)))
-        self.time_value.setText(str(self.time))
+        self.time_value.setText(str(self.time + self.time_start))
 
