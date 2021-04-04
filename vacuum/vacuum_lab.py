@@ -189,7 +189,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             self.Timer_common.timeout.connect(self.count_time)
 
         elif tm_but == "on" and self.t != 0 or tm_but == "off" and self.t != 0:
-            print(self.t)
+            # print(self.t)
             self.Timer_common.setInterval(
                 self.time_interval * self.timeSlider.value())
             self.Timer_common.timeout.connect(self.count_time)
@@ -286,6 +286,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         if int(self.p_cur) == self.p0:
             # self.Timer_common.stop()
             self.current_time = self.current_time + self.time + self.time02 + self.time03
+            self.time_label1.setText(str(0))
+            self.time_label2.setText(str(0))
             self.time = 0
             self.time02 = 0
             self.time03 = 0
