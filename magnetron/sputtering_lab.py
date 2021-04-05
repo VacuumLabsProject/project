@@ -231,7 +231,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
     def forevacuum(self):
         self.time += 1
         self.p_cur = self.vac_system.pump.start_pump(self.time,
-                                                     self.p0,
+                                                     self.p_cur,
                                                      S01=self.spinbox_S1.value(),
                                                      S02=self.spinbox_S2.value(),
                                                      V=self.spinbox_V.value(),
@@ -252,7 +252,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         Q_flow = self.gas_flow.value() * 10 ** -5
         total_flow = Q_flow + self.spinbox_Qin2.value()
         self.p_cur = self.vac_system.pump2.start_pump(self.time02,
-                                                      self.p02,
+                                                      self.p_cur,
                                                       S01=self.spinbox_S1.value(),
                                                       S02=self.spinbox_S2.value(),
                                                       V=self.spinbox_V.value(),

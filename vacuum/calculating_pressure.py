@@ -87,7 +87,7 @@ def calculating_pressure(Pcurr, t, name, S01, S02,
         Seff = (S02 * Ucurr) / (S02 + Ucurr)
         Pmin = Qin2 / Seff
         Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.01 * (Seff / V) * t)
-        # print Un
+        # print(Un)
         return Pcurr
 
 
