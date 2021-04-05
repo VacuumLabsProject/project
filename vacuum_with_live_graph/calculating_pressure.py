@@ -69,7 +69,7 @@ def calculating_U_total(d, l, P1, P2):
 Un = []
 
 
-def calculating_pressure(Pcurr, t, name, S01, S02,
+def calculating_pressure(Pcurr, t, p02, name, S01, S02,
                          V, Qin1, Qin2,
                          d1, l1, d2, l2):
     if name == "forvacuum":
@@ -77,7 +77,7 @@ def calculating_pressure(Pcurr, t, name, S01, S02,
         Un.append(Ucurr)
         Seff = (S01 * Ucurr) / (S01 + Ucurr)
         Pmin = Qin1 / Seff
-        Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.07 * (Seff / V) * t)
+        Pcurr = Pmin + (100000 - Pmin) * exp(-0.07 * (Seff / V) * t)
         # print Un
         return Pcurr
 
@@ -86,7 +86,7 @@ def calculating_pressure(Pcurr, t, name, S01, S02,
         Un.append(Ucurr)
         Seff = (S02 * Ucurr) / (S02 + Ucurr)
         Pmin = Qin2 / Seff
-        Pcurr = Pmin + (Pcurr - Pmin) * exp(-0.01 * (Seff / V) * t)
+        Pcurr = Pmin + (p02 - Pmin) * exp(-0.01 * (Seff / V) * t)
         # print Un
         return Pcurr
 

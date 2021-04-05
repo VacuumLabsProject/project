@@ -232,6 +232,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.time += 1
         self.p_cur = self.vac_system.pump.start_pump(self.time,
                                                      self.p_cur,
+                                                     p02=self.p02,
                                                      S01=self.spinbox_S1.value(),
                                                      S02=self.spinbox_S2.value(),
                                                      V=self.spinbox_V.value(),
@@ -253,6 +254,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         total_flow = Q_flow + self.spinbox_Qin2.value()
         self.p_cur = self.vac_system.pump2.start_pump(self.time02,
                                                       self.p_cur,
+                                                      p02=self.p02,
                                                       S01=self.spinbox_S1.value(),
                                                       S02=self.spinbox_S2.value(),
                                                       V=self.spinbox_V.value(),
