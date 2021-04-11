@@ -87,9 +87,8 @@ def calculating_pressure(Pcurr, t, p02, name, S01, S02,
         Seff = (S02 * Ucurr) / (S02 + Ucurr)
         Pmin = Qin2 / Seff
         Pcurr = Pmin + (p02 - Pmin) * exp(-0.01 * (Seff / V) * t)
-        # print Un
+        # print(Un)
         return Pcurr
-
 
 def calculate_overflow(t, pcur):
     P = 100000 - (100000 - pcur) * exp(-0.5 * t)
