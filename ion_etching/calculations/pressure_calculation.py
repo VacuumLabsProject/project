@@ -1,7 +1,7 @@
 from numpy import sqrt, exp
 
 
-# tube's viscous mode conductivitya
+# tube's viscous mode conductivity
 def calculating_U_viscous(d, l, P1, P2):
     Ulong = 1360 * ((d ** 4) / l) * ((P1 + P2) / 2)
     alpha = P1 / P2
@@ -78,7 +78,7 @@ def calculating_pressure(Pcurr, t, p02, name, S01, S02,
         Seff = (S01 * Ucurr) / (S01 + Ucurr)
         Pmin = Qin1 / Seff
         Pcurr = Pmin + (100000 - Pmin) * exp(-0.07 * (Seff / V) * t)
-        # print(Un)
+        # print Un
         return Pcurr
 
     elif name == "turbomolec":
@@ -87,7 +87,7 @@ def calculating_pressure(Pcurr, t, p02, name, S01, S02,
         Seff = (S02 * Ucurr) / (S02 + Ucurr)
         Pmin = Qin2 / Seff
         Pcurr = Pmin + (p02 - Pmin) * exp(-0.01 * (Seff / V) * t)
-        # print(Un)
+        # print Un
         return Pcurr
 
 
