@@ -4,8 +4,8 @@ import sys
 from PyQt5 import QtWidgets, QtCore
 from ion_etching.ui_py import edit_while_chamber_is_open
 import vacuum_system
-from ion_etching.ui_py.diploma_sputtering import Ui_Form
-from ion_etching.calculations import calculating_things, sputtering_coefficient_calculation, sputtering_calculation
+from ion_etching.ui_py.pumping_window import Ui_Form
+from ion_etching.calculations import sputtering_coefficient_calculation, etch_calculation
 
 fl_but = "off"
 tm_but = "off"
@@ -270,7 +270,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.time_label2.setText(str(self.time02))
         if float(self.p_cur) < 0.0005:
             self.gas_flow.setEnabled(True)
-        if Q_flow > 0 and self.goal_pressure-0.1 < self.p_cur < self.goal_pressure+0.1 and water == "on":
+        if Q_flow > 0 and self.goal_pressure - 0.1 < self.p_cur < self.goal_pressure + 0.1 and water == "on":
             self.calculatingFilm.setEnabled(True)
         else:
             self.calculatingFilm.setEnabled(False)
@@ -295,42 +295,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.inert_gas = info.gas.currentText()
         self.energy = info.energy.value()
         self.goal_pressure = info.pressure.value()
-        T = 773
 
         self.S = sputtering_coefficient_calculation.calculation(self.material,
                                                                 self.inert_gas,
                                                                 self.energy)
-
         if self.S == "No such pair":
             self.status_2.setText("Unavailable combination of material and gas")
         else:
-            self.M1 = self.S[1]
-            self.M2 = self.S[2]
-            d1 = self.S[3]
-            d2 = self.S[4]
-            self.Ecv = self.S[5]
+            self.M2 = self.S[1]
             self.S = self.S[0]
-            self.h_and_L = calculating_things.calculating_h(T, self.M1,
-                                                            self.M2, d1, d2,
-                                                            self.Ecv,
-                                                            self.goal_pressure)
-            self.status_2.setText(
-                "Recommended h = {} cm".format(self.h_and_L[1]))
-            self.Lambda = self.h_and_L[0]
-            self.h = self.h_and_L[1]
-            self.Lk = self.h_and_L[2]
             self.Enable.setEnabled(True)
             self.overflow.setEnabled(True)
             self.gas.setText(self.inert_gas)
 
     def calculating_film_but(self):
-        sputtering_calculation.Sputtering_Window(h=self.h,
-                                                 r=self.r,
-                                                 material=self.material,
-                                                 sputtering_coef=self.S,
-                                                 M2=self.M2,
-                                                 Lambda=self.Lambda,
-                                                 Lk=self.Lk)
+        etch_calculation.Etch_Window(
+            r=self.r,
+            material=self.material,
+            sputtering_coef=self.S,
+            M2=self.M2,
+        )
 
     def water_button_clicked(self):
         global water

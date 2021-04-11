@@ -19,20 +19,20 @@ class Ui_Form(object):
         icon.addPixmap(QtGui.QPixmap("../resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
         Form.setStyleSheet("QWidget {\n"
-"    background-color: rgb(200, 255, 255);\n"
-"}\n"
-"\n"
-".QDial, .QPushButton {\n"
-"    background-color: rgb(204, 204, 204);\n"
-"}\n"
-"\n"
-".QLabel {\n"
-"    background-color: rgb(226, 226, 226)\n"
-"}\n"
-"\n"
-".QDoubleSpinBox, .QLineEdit {\n"
-"    background-color: white\n"
-"}")
+                           "    background-color: rgb(200, 255, 255);\n"
+                           "}\n"
+                           "\n"
+                           ".QDial, .QPushButton {\n"
+                           "    background-color: rgb(204, 204, 204);\n"
+                           "}\n"
+                           "\n"
+                           ".QLabel {\n"
+                           "    background-color: rgb(226, 226, 226)\n"
+                           "}\n"
+                           "\n"
+                           ".QDoubleSpinBox, .QLineEdit {\n"
+                           "    background-color: white\n"
+                           "}")
         self.vacuum_chamber = QtWidgets.QLabel(Form)
         self.vacuum_chamber.setGeometry(QtCore.QRect(30, 20, 681, 181))
         self.vacuum_chamber.setStyleSheet("")
@@ -490,6 +490,7 @@ class Ui_Form(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()

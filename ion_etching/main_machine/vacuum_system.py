@@ -12,4 +12,3 @@ class VacuumSystem:
         self.pump = core.Pump("forevac", self.valve3, None, self.chamber)
         self.pump2 = core.Pump("turbomolec", self.valve1,
                                self.valve2, self.chamber)
-
