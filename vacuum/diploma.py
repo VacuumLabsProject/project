@@ -241,7 +241,7 @@ class Ui_Form(object):
         self.spinbox_Qin1.setGeometry(QtCore.QRect(501, 410, 71, 22))
         self.spinbox_Qin1.setDecimals(5)
         self.spinbox_Qin1.setMinimum(1e-05)
-        self.spinbox_Qin1.setMaximum(2000.0)
+        self.spinbox_Qin1.setMaximum(9.99999)
         self.spinbox_Qin1.setSingleStep(1e-05)
         self.spinbox_Qin1.setProperty("value", 0.5)
         self.spinbox_Qin1.setObjectName("spinbox_Qin1")
