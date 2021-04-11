@@ -15,6 +15,9 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(770, 549)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Dialog.setWindowIcon(icon)
         self.current_dial = QtWidgets.QDial(Dialog)
         self.current_dial.setGeometry(QtCore.QRect(10, 40, 50, 64))
         self.current_dial.setMaximum(100)
@@ -314,7 +317,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Vaporization"))
         self.current_label.setText(_translate("Dialog", "I, A"))
         self.damper.setText(_translate("Dialog", "Damper"))
         self.voltage_label.setText(_translate("Dialog", "U, V"))

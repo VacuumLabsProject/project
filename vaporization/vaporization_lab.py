@@ -284,8 +284,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.r = info.radius.value()
         self.material = info.comboBox.currentText()
         self.mass = info.weight.value()
-        self.Enable.setEnabled(True)
-        self.overflow.setEnabled(True)
+        if self.h == 0 or self.r == 0 or self.mass == 0:
+            self.status_2.setText("Values h, r and m shouldn'n be equal to 0")
+        else:
+            self.status_2.setText("Good")
+            self.Enable.setEnabled(True)
+            self.overflow.setEnabled(True)
 
     def calculating_film_but(self):
         vaporization_calculation.Vaporization_Window(h=self.h, r=self.r,
