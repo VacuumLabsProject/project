@@ -1,7 +1,7 @@
 from numpy import sqrt, exp
 
 
-# tube's viscous mode conductivity
+# tube's viscous mode conductivitya
 def calculating_U_viscous(d, l, P1, P2):
     Ulong = 1360 * ((d ** 4) / l) * ((P1 + P2) / 2)
     alpha = P1 / P2
