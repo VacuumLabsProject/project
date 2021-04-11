@@ -246,7 +246,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
                                                      l2=self.spinbox_d_tm.value())
         self.P.append(self.p_cur)
         self.time_massive.append(self.current_time + self.time)
-        # print self.P
+        # print(self.P)
         self.pressure_value.setText(str(round(self.p_cur, 2)))
         if self.p_cur > 133:
             self.progressBar.setValue(int(self.p_cur))
