@@ -56,18 +56,12 @@ def calculating_U_total(d, l, P1, P2):
     Uvisc = calculating_U_viscous(d, l, P1, P2)
     Umolec = calculatung_U_molecular(d, l)
     pd = ((P1 + P2) / 2) * d
-    print(P1)
-    print(P2)
-    print(pd)
     Z = (1 + 196 * pd) / (1 + 249 * pd)
     if pd >= 0.63:
-        print("Вязк")
         U = Uvisc
     elif pd > 6.3 * 10 ** -3:
-        print("Промеж")
         U = Uvisc * Z * Umolec
     else:
-        print("Молек")
         U = Umolec
     return U
 
