@@ -144,6 +144,7 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
             self.current_dial.setEnabled(True)
             self.voltage_dial.setEnabled(True)
             self.heat.setEnabled(True)
+            self.TimerSputtering.stop()
             self.damper_state.setStyleSheet("background-color: red;")
 
     def Timer_sputtering(self):
