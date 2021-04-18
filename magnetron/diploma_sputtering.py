@@ -458,7 +458,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Vacuum system research"))
+        Form.setWindowTitle(_translate("Form", "Magnetron system research"))
         self.valve1.setText(_translate("Form", "V1"))
         self.tm_pump.setText(_translate("Form", "TMP"))
         self.valve2.setText(_translate("Form", "V2"))
