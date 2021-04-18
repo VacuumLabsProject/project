@@ -16,7 +16,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(602, 563)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../magnetron/resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Dialog.setWindowIcon(icon)
         self.current_label = QtWidgets.QLabel(Dialog)
         self.current_label.setGeometry(QtCore.QRect(40, 100, 51, 31))

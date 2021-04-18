@@ -298,11 +298,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.energy = info.energy.value()
         self.goal_pressure = info.pressure.value()
         T = 773
-
         self.S = sputtering_coefficient_calculation.calculation(self.material,
                                                                 self.inert_gas,
                                                                 self.energy)
-
         if self.S == "No such pair":
             self.status_2.setText("Unavailable combination of material and gas")
         else:

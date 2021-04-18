@@ -16,7 +16,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(770, 549)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../vaporization/resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Dialog.setWindowIcon(icon)
         self.current_dial = QtWidgets.QDial(Dialog)
         self.current_dial.setGeometry(QtCore.QRect(10, 40, 50, 64))

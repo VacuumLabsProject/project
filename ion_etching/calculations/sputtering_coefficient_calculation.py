@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def calculation(Target, Gas, Energy):
-    constants = pd.read_csv("../resources/material_constants.csv", index_col=0)
+    constants = pd.read_csv("../ion_etching/resources/material_constants.csv", index_col=0)
     current = list(map(str, constants.at[Gas, Target].split(',')))
 
     a0 = 0.0529177 * 10 ** -9
