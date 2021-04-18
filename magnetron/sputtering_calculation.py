@@ -70,27 +70,12 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
 
         self.exec_()
 
-    def integral_0(self, rad):
-        l = 0  # center
-
-        d = (2 * (self.h ** 2)) * (((self.h ** 2) + (l ** 2) + (rad ** 2)) /
-            (((((self.h ** 2) + (l ** 2) + (rad ** 2)) ** 2) +
-            ((2 * l * self.h) ** 2)) ** 1.5)) * rad
-        return d
-
-    def integral_r(self, rad):
-        l = self.r
-        d = (2 * (self.h ** 2)) * (((self.h ** 2) + (l ** 2) + (rad ** 2)) /
-            (((((self.h ** 2) + (l ** 2) + (rad ** 2)) ** 2) +
-            ((2 * l * self.h) ** 2)) ** 1.5)) * rad
-        return d
-
     def calculate_J(self, I):
         # дисковый источник
         j_razr = I / self.area # A/m2
         # учитываем вторичную эмиссию, примем её 0.1
         ji = j_razr / 1.1  # A / m^2
-        print("***********************************************")
+        #print("***********************************************")
         self.Jm = (self.M2 * self.sputtering_coef * ji) / (self.NA * self.q)
         # плотность напыления
         """
@@ -105,22 +90,22 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         print(Jcond_0)
         print(Jcond_r)
         """
-        print("__________________________________________")
+        #print("__________________________________________")
         # толщина 2 мм. Такой рассчет верный, если толщина << радиуса
         # 0.002
         Jnap_0 = (self.Jm * (1 + (self.r_ring / self.h) ** 2) ** (-2)) * 1
-        print(Jnap_0)
+        #print(Jnap_0)
         Jnap_r = (self.Jm * ((1 + (self.r / self.h) ** 2 +
                         (self.r_ring / self.h) ** 2) /
                        ((1 - (self.r / self.h) ** 2 +
                          (self.r_ring / self.h) ** 2) ** 2 +
                         4 * (self.r_ring / self.h) ** 2) ** (3 / 2))) * 1
-        print(Jnap_r)
+        #print(Jnap_r)
         # плотность осаждения
         Jcond_0 = (Jnap_0 * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
         Jcond_r = (Jnap_r * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
-        print(Jcond_0)
-        print(Jcond_r)
+        #print(Jcond_0)
+        #print(Jcond_r)
 
         return Jcond_0, Jcond_r
 
@@ -182,3 +167,23 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         self.dr.setText(str(round(self.dr_val, 2)))
         self.K0.setText(str(round(K, 2)))
         self.time_value.setText(str(self.time + self.time_start))
+
+"""
+    def integral_0(self, rad):
+        l = 0  # center
+
+        d = (2 * (self.h ** 2)) * (((self.h ** 2) + (l ** 2) + (rad ** 2)) /
+            (((((self.h ** 2) + (l ** 2) + (rad ** 2)) ** 2) +
+            ((2 * l * self.h) ** 2)) ** 1.5)) * rad
+        return d
+
+    def integral_r(self, rad):
+        l = self.r
+        d = (2 * (self.h ** 2)) * (((self.h ** 2) + (l ** 2) + (rad ** 2)) /
+            (((((self.h ** 2) + (l ** 2) + (rad ** 2)) ** 2) +
+            ((2 * l * self.h) ** 2)) ** 1.5)) * rad
+        return d
+"""
+
+
+
