@@ -96,7 +96,10 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
 
     def heat_clicked(self):
         global heat_but
-        heat_but = "on"
+        if heat_but == "off":
+            heat_but = "on"
+        else:
+            heat_but = "off"
         self.p_limitation()
 
     def p_limitation(self):
@@ -105,16 +108,19 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
             self.damper.setEnabled(False)
             self.status.setText("Set the temperature of vaporization")
         else:
-            self.P0 = calculate_p0(self.A, self.B, self.T)
-            if self.P0 < 133 and heat_but == "on":
-                self.damper.setEnabled(True)
-                self.status.setText("Ready for work")
-            elif self.P0 >= 133:
-                self.damper.setEnabled(False)
-                self.status.setText("Saturated steam pressure too high. "
-                                    "Decrease the temperature.")
-            elif heat_but != "on":
+            if heat_but != "on":
                 self.status.setText("Heat the substrate")
+                self.damper.setEnabled(False)
+            else:
+                self.P0 = calculate_p0(self.A, self.B, self.T)
+                if self.P0 < 133:
+                    self.damper.setEnabled(True)
+                    self.status.setText("Ready for work")
+                else:
+                    self.damper.setEnabled(False)
+                    self.status.setText("Saturated steam pressure too high. "
+                                    "Decrease the temperature.")
+
 
     def current_value(self):
         self.current.setText(str(self.current_dial.value()))
