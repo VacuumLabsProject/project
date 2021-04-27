@@ -61,7 +61,7 @@ class Ui_Dialog(object):
         font.setPointSize(10)
         self.weight.setFont(font)
         self.weight.setDecimals(3)
-        self.weight.setMaximum(9.999)
+        self.weight.setMaximum(99.999)
         self.weight.setSingleStep(0.001)
         self.weight.setObjectName("weight")
         self.m_label = QtWidgets.QLabel(Dialog)
@@ -103,7 +103,7 @@ class Ui_Dialog(object):
         self.comboBox.setItemText(2, _translate("Dialog", "Cr"))
         self.ok_button.setText(_translate("Dialog", "OK"))
         self.h_label.setText(_translate("Dialog", "h, cm"))
-        self.m_label.setText(_translate("Dialog", "m, g"))
+        self.m_label.setText(_translate("Dialog", "m, mg"))
         self.r_label.setText(_translate("Dialog", "r, cm"))
 
 

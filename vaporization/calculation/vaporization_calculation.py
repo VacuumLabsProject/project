@@ -62,7 +62,7 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
             M = 0.0519961
 
         self.h = h / 100 # m
-        self.m = mass / 1000 # kg
+        self.m = mass / 1000000 # kg
         self.ro = ro # kg/m3
         self.r = r / 100 # m
         self.A = A
