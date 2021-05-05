@@ -40,7 +40,7 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         self.NA = 6.02 * 10 ** 23
         self.q = 1.6 * 10 ** (-19)
 
-        self.cathode_r = 3 / 100 # m
+        #self.cathode_r = 3 / 100 # m
         self.ring_r_out = 2.5 / 100  # m
         self.ring_r_in = 2.3 / 100  # m
 
@@ -93,13 +93,13 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         #print("__________________________________________")
         # толщина 2 мм. Такой рассчет верный, если толщина << радиуса
         # 0.002
-        Jnap_0 = (self.Jm * (1 + (self.r_ring / self.h) ** 2) ** (-2)) * 1
+        Jnap_0 = (self.Jm * (1 + (self.r_ring / self.h) ** 2) ** (-2)) * 0.002
         #print(Jnap_0)
         Jnap_r = (self.Jm * ((1 + (self.r / self.h) ** 2 +
                         (self.r_ring / self.h) ** 2) /
                        ((1 - (self.r / self.h) ** 2 +
                          (self.r_ring / self.h) ** 2) ** 2 +
-                        4 * (self.r_ring / self.h) ** 2) ** (3 / 2))) * 1
+                        4 * (self.r_ring / self.h) ** 2) ** (3 / 2))) * 0.002
         #print(Jnap_r)
         # плотность осаждения
         Jcond_0 = (Jnap_0 * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
@@ -162,10 +162,10 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         self.time += 1
         self.d0_val = self.d0_start + self.vcond_0 * self.time * 10**9
         self.dr_val = self.dr_start + self.vcond_r * self.time * 10**9
-        K = abs(self.d0_val - self.dr_val) / self.d0_val
+        #K = abs(self.d0_val - self.dr_val) / self.d0_val
         self.d0.setText(str(round(self.d0_val, 2)))
         self.dr.setText(str(round(self.dr_val, 2)))
-        self.K0.setText(str(round(K, 2)))
+        #self.K0.setText(str(round(K, 2)))
         self.time_value.setText(str(self.time + self.time_start))
 
 """

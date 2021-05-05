@@ -81,6 +81,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             self.valve3.setEnabled(True)
             self.valve2.setEnabled(True)
             self.overflow.setEnabled(False)
+            self.Enable.setEnabled(False)
 
         else:
             fl_but = "off"
@@ -88,6 +89,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             self.valve3.setEnabled(False)
             self.valve2.setEnabled(False)
             self.overflow.setEnabled(True)
+            self.Enable.setEnabled(True)
 
     def Enable_tm_pump(self):
         global tm_but
@@ -150,10 +152,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             overflow = "off"
             self.p0 = self.p_cur
             self.fl_pump.setEnabled(True)
+            self.Enable.setEnabled(True)
             self.Timer_common_func()
         else:
             overflow = "on"
             self.fl_pump.setEnabled(False)
+            self.Enable.setEnabled(False)
             self.Timer_common_func()
 
     def Timer_common_func(self):
@@ -188,7 +192,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             self.Timer_common.timeout.connect(self.count_time)
 
         elif tm_but == "on" and self.t != 0 or tm_but == "off" and self.t != 0:
-            print(self.t)
+            # print(self.t)
             self.Timer_common.setInterval(
                 self.time_interval * self.timeSlider.value())
             self.Timer_common.timeout.connect(self.count_time)

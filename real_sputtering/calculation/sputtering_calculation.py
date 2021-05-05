@@ -62,7 +62,7 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         # дисковый источник
         j_razr = I / self.area  # A / m^2
         # учитываем вторичную эмиссию, примем её 0.1
-        ji = j_razr / 1.2  # A / m^2
+        ji = j_razr / 1.1  # A / m^2
 
         Jm = (self.M2 * self.sputtering_coef * ji) / (self.NA * self.q)
         # плотность напыления
