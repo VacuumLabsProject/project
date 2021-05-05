@@ -37,8 +37,8 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         self.NA = 6.02 * 10 ** 23
         self.q = 1.6 * 10 ** (-19)
 
-        self.d = 0.025 # m радиус распылителя
-        self.area = (pi * self.d ** 2) / 4 # m^2
+        self.rad_rasp = 0.025 # m радиус распылителя
+        self.area = pi * self.rad_rasp ** 2# m^2
 
         self.target_diameter.setText(str(round(self.r * 1000)))
         self.sputtering_coefficient.setText(str(round(sputtering_coef, 2)))
@@ -66,11 +66,11 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
 
         Jm = (self.M2 * self.sputtering_coef * ji) / (self.NA * self.q)
         # плотность напыления
-        Jnap_0 = (Jm / 2) * ((2 * (self.d / self.h) ** 2) / (
-                    1 + (self.d / self.h) ** 2))
+        Jnap_0 = (Jm / 2) * ((2 * (self.rad_rasp / self.h) ** 2) / (
+                    1 + (self.rad_rasp / self.h) ** 2))
         Jnap_r = (Jm / 2) * (1 - (
-                    (1 + (self.r / self.h) ** 2 - (self.d / self.h) ** 2) / sqrt((1 - (
-                        self.r / self.h) ** 2 + (self.d / self.h) ** 2) ** 2 + 4 * (self.r / self.h) ** 2)))
+                    (1 + (self.r / self.h) ** 2 - (self.rad_rasp / self.h) ** 2) / sqrt((1 - (
+                        self.r / self.h) ** 2 + (self.rad_rasp / self.h) ** 2) ** 2 + 4 * (self.r / self.h) ** 2)))
         # плотность осаждения
         Jcond_0 = (Jnap_0 * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
         Jcond_r = (Jnap_r * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
