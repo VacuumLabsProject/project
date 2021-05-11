@@ -75,6 +75,7 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         j_razr = I / self.area # A/m2
         # учитываем вторичную эмиссию, примем её 0.1
         ji = j_razr / 1.1  # A / m^2
+
         #print("***********************************************")
         self.Jm = (self.M2 * self.sputtering_coef * ji) / (self.NA * self.q)
         # плотность напыления
@@ -93,6 +94,16 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         #print("__________________________________________")
         # толщина 2 мм. Такой рассчет верный, если толщина << радиуса
         # 0.002
+
+        Jnap_0 = ((2 * self.Jm * self.r_ring * self.h ** 2) *
+                 ((self.h ** 2 + self.r_ring ** 2) /
+                  ((self.h ** 2 + self.r_ring ** 2) ** 2)))
+
+        Jnap_r = ((2 * self.Jm * self.r_ring * self.h ** 2) *
+                 ((self.h ** 2 + self.r ** 2 + self.r_ring ** 2) /
+                  ((self.h ** 2 - self.r ** 2 + self.r_ring ** 2) ** 2) + (2 * self.h * self.r) ** 2))
+
+        """
         Jnap_0 = (self.Jm * (1 + (self.r_ring / self.h) ** 2) ** (-2)) * 0.002
         #print(Jnap_0)
         Jnap_r = (self.Jm * ((1 + (self.r / self.h) ** 2 +
@@ -100,6 +111,7 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
                        ((1 - (self.r / self.h) ** 2 +
                          (self.r_ring / self.h) ** 2) ** 2 +
                         4 * (self.r_ring / self.h) ** 2) ** (3 / 2))) * 0.002
+                        """
         #print(Jnap_r)
         # плотность осаждения
         Jcond_0 = (Jnap_0 * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)

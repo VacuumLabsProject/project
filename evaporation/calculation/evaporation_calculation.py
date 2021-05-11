@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, QtCore
-from vaporization.qt_py.dialog_vaporization import Ui_Dialog
+from evaporation.qt_py.dialog_evaporation import Ui_Dialog
 from numpy import pi, sqrt, log10
 
 damper_but = "off"
@@ -106,7 +106,7 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
         global heat_but
         if int(self.T) == 0:
             self.damper.setEnabled(False)
-            self.status.setText("Set the temperature of vaporization")
+            self.status.setText("Set the temperature of evaporation")
         else:
             if heat_but != "on":
                 self.status.setText("Heat the substrate")

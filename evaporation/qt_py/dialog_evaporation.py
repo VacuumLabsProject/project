@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'dialog_vaporization.ui'
+# Form implementation generated from reading ui file 'dialog_evaporation.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -16,7 +16,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(770, 549)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../vaporization/resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../evaporation/resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Dialog.setWindowIcon(icon)
         self.current_dial = QtWidgets.QDial(Dialog)
         self.current_dial.setGeometry(QtCore.QRect(10, 40, 50, 64))
@@ -317,7 +317,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Vaporization"))
+        Dialog.setWindowTitle(_translate("Dialog", "Evaporation"))
         self.current_label.setText(_translate("Dialog", "I, A"))
         self.damper.setText(_translate("Dialog", "Damper"))
         self.voltage_label.setText(_translate("Dialog", "U, V"))

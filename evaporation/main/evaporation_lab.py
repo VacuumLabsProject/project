@@ -2,10 +2,10 @@ import random
 import sys
 
 from PyQt5 import QtWidgets, QtCore
-from vaporization.calculation import vaporization_calculation
+from evaporation.calculation import evaporation_calculation
 import edit_while_chamber_is_open
 import vacuum_system
-from vaporization.qt_py.diploma_vaporization import Ui_Form
+from evaporation.qt_py.diploma_evaporation import Ui_Form
 
 fl_but = "off"
 tm_but = "off"
@@ -296,9 +296,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             self.overflow.setEnabled(True)
 
     def calculating_film_but(self):
-        vaporization_calculation.Vaporization_Window(h=self.h, r=self.r,
-                                                     material=self.material,
-                                                     mass=self.mass)
+        evaporation_calculation.Vaporization_Window(h=self.h, r=self.r,
+                                                    material=self.material,
+                                                    mass=self.mass)
 
 
 if __name__ == "__main__":

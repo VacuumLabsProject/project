@@ -299,6 +299,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.inert_gas = info.gas.currentText()
         self.energy = info.energy.value()
         self.goal_pressure = info.pressure.value()
+        self.h = info.distance.value()
         T = 773
 
         self.S = sputtering_coefficient_calculation.calculation(self.material,
@@ -313,11 +314,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
             d2 = self.S[4]
             self.Ecv = self.S[5]
             self.S = self.S[0]
-            self.h_and_L = calculating_things.calculating_h(T, self.M1, self.M2, d1, d2, self.Ecv, self.goal_pressure)
+            self.Lk_and_Lambda = calculating_things.calculating_h(T, self.M1, self.M2, d1, d2, self.Ecv, self.goal_pressure)
+            self.Lambda = self.Lk_and_Lambda[0]
+            self.Lk = self.Lk_and_Lambda[1]
+            self.status_2.setText("Good")
+            """
             self.status_2.setText("Recommended h = {} cm".format(self.h_and_L[1]))
             self.Lambda = self.h_and_L[0]
             self.h = self.h_and_L[1]
             self.Lk = self.h_and_L[2]
+            """
             self.Enable.setEnabled(True)
             self.overflow.setEnabled(True)
             self.gas.setText(self.inert_gas)

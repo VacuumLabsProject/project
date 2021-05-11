@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'diploma_vaporization.ui'
+# Form implementation generated from reading ui file 'diploma_evaporation.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -16,7 +16,7 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(1165, 699)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../vaporization/resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../evaporation/resources/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
         Form.setStyleSheet("QWidget {\n"
 "    background-color: rgb(200, 255, 255);\n"
@@ -426,7 +426,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Vaporization research"))
+        Form.setWindowTitle(_translate("Form", "Evaporation research"))
         self.valve1.setText(_translate("Form", "V1"))
         self.tm_pump.setText(_translate("Form", "TMP"))
         self.valve2.setText(_translate("Form", "V2"))

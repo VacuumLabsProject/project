@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from vaporization.qt_py.dialog_chamber import Ui_Dialog
+from evaporation.qt_py.dialog_chamber import Ui_Dialog
 
 
 class New_Window(QtWidgets.QDialog, Ui_Dialog):
