@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 from magnetron.qt_py.dialog_sputtering import Ui_Dialog
 from numpy import pi, sqrt, log10, arctan
-# import scipy.integrate as integrate
+import scipy.integrate as integrate
 
 damper_but = "off"
 voltage_but = "off"
@@ -82,8 +82,11 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         """
         Jnap_0 = integrate.quad(self.integral_0, self.ring_r_in, self.ring_r_out)[0]
         Jnap_r = integrate.quad(self.integral_r, self.ring_r_in, self.ring_r_out)[0]
+        print('integrate')
         print(Jnap_0)
         print(Jnap_r)
+        """
+        """
         Jcond_0 = (Jnap_0 * self.Lambda) / (
                     self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
         Jcond_r = (Jnap_r * self.Lambda) / (
@@ -99,9 +102,18 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
                  ((self.h ** 2 + self.r_ring ** 2) /
                   ((self.h ** 2 + self.r_ring ** 2) ** 2)))
 
+        """
+        for i in range(81):
+            Jnap_i = ((2 * self.Jm * self.r_ring * self.h ** 2) *
+                 ((self.h ** 2 + (i * 0.001) ** 2 + self.r_ring ** 2) /
+                  ((self.h ** 2 - (i * 0.001) ** 2 + self.r_ring ** 2) ** 2 + (2 * self.h * (i * 0.001)) ** 2)))
+            print(Jnap_i)
+        """
+
         Jnap_r = ((2 * self.Jm * self.r_ring * self.h ** 2) *
                  ((self.h ** 2 + self.r ** 2 + self.r_ring ** 2) /
-                  ((self.h ** 2 - self.r ** 2 + self.r_ring ** 2) ** 2) + (2 * self.h * self.r) ** 2))
+                  ((self.h ** 2 - self.r ** 2 + self.r_ring ** 2) ** 2 + (2 * self.h * self.r) ** 2)))
+
 
         """
         Jnap_0 = (self.Jm * (1 + (self.r_ring / self.h) ** 2) ** (-2)) * 0.002
@@ -111,8 +123,8 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
                        ((1 - (self.r / self.h) ** 2 +
                          (self.r_ring / self.h) ** 2) ** 2 +
                         4 * (self.r_ring / self.h) ** 2) ** (3 / 2))) * 0.002
-                        """
-        #print(Jnap_r)
+        """
+         #print(Jnap_r)
         # плотность осаждения
         Jcond_0 = (Jnap_0 * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
         Jcond_r = (Jnap_r * self.Lambda) / (self.Lambda + (sqrt(self.Lk) - sqrt(self.h)) ** 2)
@@ -180,22 +192,25 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         #self.K0.setText(str(round(K, 2)))
         self.time_value.setText(str(self.time + self.time_start))
 
-"""
+    """
     def integral_0(self, rad):
         l = 0  # center
 
-        d = (2 * (self.h ** 2)) * (((self.h ** 2) + (l ** 2) + (rad ** 2)) /
-            (((((self.h ** 2) + (l ** 2) + (rad ** 2)) ** 2) +
-            ((2 * l * self.h) ** 2)) ** 1.5)) * rad
+        d = ((2 * self.Jm * rad * self.h ** 2) *
+                 ((self.h ** 2 + l ** 2 + rad ** 2) /
+                  ((self.h ** 2 - l ** 2 + rad ** 2) ** 2 + (2 * self.h * l) ** 2)))
         return d
 
     def integral_r(self, rad):
         l = self.r
-        d = (2 * (self.h ** 2)) * (((self.h ** 2) + (l ** 2) + (rad ** 2)) /
-            (((((self.h ** 2) + (l ** 2) + (rad ** 2)) ** 2) +
-            ((2 * l * self.h) ** 2)) ** 1.5)) * rad
+
+        d = ((2 * self.Jm * rad * self.h ** 2) *
+                 ((self.h ** 2 + l ** 2 + rad ** 2) /
+                  ((self.h ** 2 - l ** 2 + rad ** 2) ** 2 + (2 * self.h * l) ** 2)))
+
         return d
-"""
+    """
+
 
 
 
