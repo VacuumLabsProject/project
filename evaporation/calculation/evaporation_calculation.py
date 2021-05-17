@@ -72,7 +72,7 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
 
         self.jm = 0
         self.T = 0
-
+        self.Resistance = 0.1
         self.S = 4 * 10 ** -4 # spiral surface area
         self.eps = 0.8
         self.S_B = 5.67 * 10 ** -8
@@ -86,8 +86,8 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
 
         self.current_dial.valueChanged.connect(
             self.current_value)
-        self.voltage_dial.valueChanged.connect(
-            self.voltage_value)
+        #self.voltage_dial.valueChanged.connect(
+            #self.voltage_value)
         self.damper.clicked.connect(self.damper_change)
         self.timeSlider.valueChanged.connect(self.Timer_sputtering)
         self.heat.clicked.connect(self.heat_clicked)
@@ -124,31 +124,31 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
 
     def current_value(self):
         self.current.setText(str(self.current_dial.value()))
-        Q = self.current_dial.value() * self.voltage_dial.value()
+        Q = self.current_dial.value() ** 2 * self.Resistance # self.voltage_dial.value()
         self.T = (Q / (self.eps * self.S_B * self.S)) ** (1. / 4)
         self.temperature.setText(str(int(self.T)))
         self.p_limitation()
 
-    def voltage_value(self):
-        self.voltage.setText(str(self.voltage_dial.value()))
-        Q = self.current_dial.value() * self.voltage_dial.value()
-        self.T = (Q / (self.eps * self.S_B * self.S)) ** (1. / 4)
-        self.temperature.setText(str(int(self.T)))
-        self.p_limitation()
+    #def voltage_value(self):
+        #self.voltage.setText(str(self.voltage_dial.value()))
+        #Q = self.current_dial.value() * self.voltage_dial.value()
+        #self.T = (Q / (self.eps * self.S_B * self.S)) ** (1. / 4)
+        #self.temperature.setText(str(int(self.T)))
+        #self.p_limitation()
 
     def damper_change(self):
         global damper_but
         if damper_but == "off":
             damper_but = "on"
             self.current_dial.setEnabled(False)
-            self.voltage_dial.setEnabled(False)
+            #self.voltage_dial.setEnabled(False)
             self.heat.setEnabled(False)
             self.damper_state.setStyleSheet("background-color: green;")
             self.Timer_sputtering()
         else:
             damper_but = "off"
             self.current_dial.setEnabled(True)
-            self.voltage_dial.setEnabled(True)
+            #self.voltage_dial.setEnabled(True)
             self.heat.setEnabled(True)
             self.TimerSputtering.stop()
             self.damper_state.setStyleSheet("background-color: red;")
