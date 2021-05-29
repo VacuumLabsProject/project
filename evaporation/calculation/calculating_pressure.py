@@ -60,7 +60,7 @@ def calculating_U_total(d, l, P1, P2):
     if pd >= 0.63:
         U = Uvisc
     elif pd > 6.3 * 10 ** -3:
-        U = Uvisc * Z * Umolec
+        U = Uvisc + Z * Umolec
     else:
         U = Umolec
     return U

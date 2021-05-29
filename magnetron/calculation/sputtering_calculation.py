@@ -43,11 +43,13 @@ class Sputtering_Window(QtWidgets.QDialog, Ui_Dialog):
         #self.cathode_r = 3 / 100 # m
         self.ring_r_out = 2.5 / 100  # m
         self.ring_r_in = 2.3 / 100  # m
+        # пока что модель бесконечно тонкого кольцевого источника
+        self.r_ring = 2.4 / 100  # m
 
         self.area = pi * (self.ring_r_out ** 2 - self.ring_r_in ** 2) # площадь плазмы
+        #self.area = 2 * pi * self.r_ring * dr
 
-        # пока что модель бесконечно тонкого кольцевого источника
-        self.r_ring = 2.4/100 # m
+
 
         self.target_diameter.setText(str(round(self.r * 1000)))
         self.sputtering_coefficient.setText(
