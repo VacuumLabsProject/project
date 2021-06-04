@@ -113,14 +113,17 @@ class Vaporization_Window(QtWidgets.QDialog, Ui_Dialog):
                 self.damper.setEnabled(False)
             else:
                 self.P0 = calculate_p0(self.A, self.B, self.T)
-                if self.P0 < 133:
-                    self.damper.setEnabled(True)
-                    self.status.setText("Ready for work")
-                else:
+                if self.P0 > 133:
                     self.damper.setEnabled(False)
                     self.status.setText("Saturated steam pressure too high. "
-                                    "Decrease the temperature.")
-
+                                        "Decrease the temperature.")
+                elif self.P0 < 0.001:
+                    self.damper.setEnabled(False)
+                    self.status.setText("Saturated steam pressure too low. "
+                                        "Increase the temperature.")
+                else:
+                    self.damper.setEnabled(True)
+                    self.status.setText("Ready for work")
 
     def current_value(self):
         self.current.setText(str(self.current_dial.value()))
